@@ -55,35 +55,52 @@ BSlink = (
             "-s": "Sleeping",
             "-b": "Busy",
             "-w": "Watching",
-        },
+    },
+)
+async def fui(message: Message):
+    pass
+
+@userge.on_cmd(
+    "Fui -s$",
+    about={
+        "header": "plugin",
     },
     trigger="",
     allow_via_bot=False,
 )
 async def fui_(message: Message):
     """ Executa .afk """
-    if message.input_str == "Fui -s":
-        _fui = f"!afk {random.choice(sp)} | {random.choice(SPlink)}"
-        await message.try_to_edit(_fui, del_in=1)
-    if "w" in message.flags:
-        pass
-        _fui = f"!afk {random.choice(wt)} | {random.choice(WTlink)}"
-        await message.try_to_edit(_fui, del_in=1)
-    if "b" in message.flags:
-        _fui = f"!afk {random.choice(bs)} | {random.choice(BSlink)}"
-        await message.try_to_edit(_fui, del_in=1)
+    _fui = f"!afk {random.choice(sp)} | {random.choice(SPlink)}"
+    await message.try_to_edit(_fui, del_in=1)
     
     # _fui = "!afk Zzz... | https://telegra.ph/file/5f5ef5dde5e811ab753b5.gif"
     # await message.try_to_edit(_fui, del_in=1)
-    
+
+
 @userge.on_cmd(
-    "Fui -s",
+    "Fui -w$",
     about={
         "header": "plugin",
     },
+    trigger="",
+    allow_via_bot=False,
 )
 async def _fui(message: Message):
-    pass
+    fui_ = f"!afk {random.choice(wt)} | {random.choice(WTlink)}"
+    await message.try_to_edit(fui_, del_in=1)
+
+
+@userge.on_cmd(
+    "Fui -b$",
+    about={
+        "header": "plugin",
+    },
+    trigger="",
+    allow_via_bot=False,
+)
+async def _fui_(message: Message):
+    _fui_ = f"!afk {random.choice(bs)} | {random.choice(BSlink)}"
+    await message.try_to_edit(_fui_, del_in=1)
     
 
 async def check_and_send(message: Message, *args, **kwargs):
