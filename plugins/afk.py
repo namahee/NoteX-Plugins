@@ -147,11 +147,9 @@ async def handle_afk_incomming(message: Message) -> None:
                 url_ = match.group(0)
                 type_, media_ = await _afk_.check_media_link(url_)
                 if type_ == "url_gif":
-                    r = REASON.split(" | ", maxsplit=1)
-                    STATUS = r[0]
                     out_str = (
                         f"⚡️ **Auto Reply** ⒶⒻⓀ \n🕑 **Last Seen:** {afk_time} ago\n"
-                        f"▫️ **Status**: {STATUS}"
+                        f"▫️ **Status**: {STATUS_}"
                     )
                     await client.send_animation(
                         chat_id,
@@ -159,20 +157,13 @@ async def handle_afk_incomming(message: Message) -> None:
                         caption=out_str,
                         reply_markup=_afk_.afk_buttons(),
                     )
-                else:
-                    if type_ == "url_image":
-                        r = REASON.split(" | ", maxsplit=1)
-                        STATUS = r[0]
-                        out_str = (
-                            f"⚡️ **Auto Reply** ⒶⒻⓀ \n🕑 **Last Seen:** {afk_time} ago\n"
-                            f"▫️ **Status**: {STATUS}"
-                        )
-                        await client.send_photo(
-                            chat_id,
-                            photo=url_,
-                            caption=out_str,
-                            reply_markup=_afk_.afk_buttons(),
-                        )
+                elif type_ == "url_image":
+                    await client.send_photo(
+                        chat_id,
+                        photo=url_,
+                        caption=out_str,
+                        reply_markup=_afk_.afk_buttons(),
+                    )
             else:
                 out_str = (
                     f"⚡️ **Auto Reply** ⒶⒻⓀ \n🕑 **Last Seen:** {afk_time} ago\n"
