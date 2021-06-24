@@ -29,7 +29,9 @@ wt = (
     "I'm watching right now.",
 )
 WTlink = (
-    
+    "https://telegra.ph/file/5f153409f120195f14491.gif",
+    "https://telegra.ph/file/081808e86849851e6510c.gif",
+    "https://telegra.ph/file/d923af73a7e7643e6d902.gif",
 )
 
 # Busy
