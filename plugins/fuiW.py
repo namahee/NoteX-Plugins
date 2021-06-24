@@ -5,16 +5,16 @@ from userge import Message, userge
 import random
 
 
-# Busy
-bs = (
-    "I'm busy.",
-    "Busy busy.",
-    "I'm busy right now.",
+# Watching
+wt = (
+    "I'm watching.",
+    "Watching.",
+    "I'm watching right now.",
 )
-BSlink = (
-    "https://telegra.ph/file/ccc44664b624bd2bdbbc1.gif",
-    "https://telegra.ph/file/fbbda51c7665c23062b42.gif",
-    "https://telegra.ph/file/bd9e0d0096aecc3232770.gif",
+WTlink = (
+    "https://telegra.ph/file/5f153409f120195f14491.gif",
+    "https://telegra.ph/file/081808e86849851e6510c.gif",
+    "https://telegra.ph/file/d923af73a7e7643e6d902.gif",
 )
 
 
