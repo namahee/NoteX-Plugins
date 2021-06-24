@@ -160,7 +160,7 @@ async def handle_afk_incomming(message: Message) -> None:
                     f"▫️ **Status**: {STATUS}"
                 )
                 coro_list(
-                    await send_animation(
+                    await client.send_animation(
                         chat_id,
                         animation=match.group(0),
                         caption=out_str,
