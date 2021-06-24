@@ -4,9 +4,49 @@ import asyncio
 
 from userge import Message, userge
 
+import random
+
+
+# Reasons/Status
+
+# Sleeping
+sp = (
+    "I'm sleeping.",
+    "Sleeping."
+    "Zzz...",
+)
+SPlink = (
+    "https://telegra.ph/file/ca7449b0175e38aa91173.gif",
+    "https://telegra.ph/file/e24024983e40d14e6ba7c.gif",
+    "https://telegra.ph/file/95d666e5638d30574688f.gif",
+    "https://telegra.ph/file/17b67e992945d187c15f8.gif"
+)
+
+# Watching
+wt = (
+    "I'm watching.",
+    "Watching.",
+    "I'm watching right now.",
+)
+WTlink = (
+    
+)
+
+# Busy
+bs = (
+    "I'm busy.",
+    "Busy busy."
+    "I'm busy right now."
+)
+BSlink = (
+    "https://telegra.ph/file/ccc44664b624bd2bdbbc1.gif",
+    "https://telegra.ph/file/fbbda51c7665c23062b42.gif",
+    "https://telegra.ph/file/bd9e0d0096aecc3232770.gif",
+)
+
 
 @userge.on_cmd(
-    "fui$",
+    "Fui$",
     about={
         "header": "executa .afk",
         "flags": {
@@ -19,7 +59,10 @@ from userge import Message, userge
     allow_via_bot=False,
 )
 async def fui_(message: Message):
-    """fui_"""
+    """ Executa .afk """
+    if "s" in message.flags:
+        _fui = f"!afk {random.choice(sp)} | {random.choice(SPlink)}"
+    
     _fui = "!afk Zzz... | https://telegra.ph/file/5f5ef5dde5e811ab753b5.gif"
     await message.try_to_edit(_fui, del_in=1)
 
