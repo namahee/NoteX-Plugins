@@ -79,8 +79,8 @@ async def fui_(message: Message):
 @userge.on_cmd(
     "Fui -s"
     about={
-        "header": "plugin"
-    }
+        "header": "plugin",
+    },
 )
 async def _fui(message: Message):
     pass
