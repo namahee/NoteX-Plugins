@@ -114,30 +114,28 @@ async def handle_afk_incomming(message: Message) -> None:
         if not (USERS[user_id][0] + USERS[user_id][1]) % randint(2, 4):
             match = _TELE_REGEX.search(REASON)
             if match:
-                if match.group(3) == "gif" or "mp4":
+                url_ = match.group(0)
+                type_, media_ = await _afk_.check_media_link(url_)
+                if type_ == "url_gif:
                     r = REASON.split(" | ", maxsplit=1)
                     STATUS = r[0]
                     out_str = (
                         f"⚡️ **Auto Reply** ⒶⒻⓀ \n🕑 **Last Seen:** {afk_time} ago\n"
                         f"▫️ **Status**: {STATUS}"
                     )
-                    coro_list.append(
                         await client.send_animation(
                             chat_id,
-                            animation=match.group(0),
+                            animation=url_,
                             caption=out_str,
                             reply_markup=_afk_.afk_buttons(),
                         )
-                    )
                 else:
-                    if match.group(3) == "jpg" or "png":
-                        coro_list.append(
-                            await client.send_photo(
-                                chat_id,
-                                photo=match.group(0),
-                                caption=out_str,
-                                reply_markup=_afk_.afk_buttons(),
-                            )
+                    if type_ == "url_image":
+                        await client.send_photo(
+                            chat_id,
+                            photo=url_,
+                            caption=out_str,
+                            reply_markup=_afk_.afk_buttons(),
                         )
             else:
                 out_str = (
@@ -152,30 +150,29 @@ async def handle_afk_incomming(message: Message) -> None:
     else:
         match = _TELE_REGEX.search(REASON)
         if match:
-            if match.group(3) == "gif" or "mp4":
+            url_ = match.group(0)
+            type_, media_ = _afk_.check_media_link(url_)
+            if type_ == "url_gif":
                 r = REASON.split(" | ", maxsplit=1)
                 STATUS = r[0]
                 out_str = (
                     f"⚡️ **Auto Reply** ⒶⒻⓀ \n🕑 **Last Seen:** {afk_time} ago\n"
                     f"▫️ **Status**: {STATUS}"
                 )
-                coro_list.append(
-                    await client.send_animation(
-                        chat_id,
-                        animation=match.group(0),
-                        caption=out_str,
-                        reply_markup=_afk_.afk_buttons(),
-                    )
+                await client.send_animation(
+                    chat_id,
+                    animation=url_,
+                    caption=out_str,
+                    reply_markup=_afk_.afk_time(),
                 )
-            elif match.group(3) == "jpg" or "png":
-                coro_list.append(
+            else:
+                if type_ == "url_image":
                     await client.send_photo(
                         chat_id,
-                        photo=match.group(0),
+                        photo=url_,
                         caption=out_str,
                         reply_markup=_afk_.afk_buttons(),
                     )
-                )
                 
             # url_ = LINK.strip()
             # type_, media_ = await _afk_.check_media_link(LINK)
