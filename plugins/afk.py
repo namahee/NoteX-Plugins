@@ -166,11 +166,11 @@ async def handle_afk_incomming(message: Message) -> None:
                     reply_markup=_afk_.afk_time(),
                 )
             else:
-                out_str = (
-                    f"⚡️ **Auto Reply** ⒶⒻⓀ \n🕑 **Last Seen:** {afk_time} ago\n"
-                    f"▫️ **Status**: {STATUS}"
-                )
                 if type_ == "url_image":
+                    out_str = (
+                        f"⚡️ **Auto Reply** ⒶⒻⓀ \n🕑 **Last Seen:** {afk_time} ago\n"
+                        f"▫️ **Status**: {STATUS}"
+                    )
                     await client.send_photo(
                         chat_id,
                         photo=url_,
