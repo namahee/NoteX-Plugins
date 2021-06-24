@@ -108,7 +108,7 @@ async def handle_afk_incomming(message: Message) -> None:
     afk_time = time_formatter(round(time.time() - TIME))
     coro_list = []
 
-    message.client
+    client = message.client
     chat_id = message.chat.id
     if user_id in USERS:
         if not (USERS[user_id][0] + USERS[user_id][1]) % randint(2, 4):
