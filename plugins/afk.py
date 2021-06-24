@@ -130,9 +130,9 @@ async def handle_afk_incomming(message: Message) -> None:
                         )
                     )
                 else:
-                    if match.group(3) == "jpg" or "png" or "jpeg":
+                    if match.group(3) == "jpg" or "png":
                         coro_list.append(
-                            await client.send_animation(
+                            await client.send_photo(
                                 chat_id,
                                 photo=match.group(0),
                                 caption=out_str,
@@ -152,18 +152,31 @@ async def handle_afk_incomming(message: Message) -> None:
     else:
         match = _TELE_REGEX.search(REASON)
         if match:
-            r = REASON.split(" | ", maxsplit=1)
-            STATUS = r[0]
-            out_str = (
-                f"⚡️ **Auto Reply** ⒶⒻⓀ \n🕑 **Last Seen:** {afk_time} ago\n"
-                f"▫️ **Status**: {STATUS}"
-            )
-            await send_animation(
-                chat_id,
-                animation=match.group(0),
-                caption=out_str,
-                reply_markup=_afk_.afk_buttons(),
-            )
+            if match.group(3) == "gif" or "mp4":
+                r = REASON.split(" | ", maxsplit=1)
+                STATUS = r[0]
+                out_str = (
+                    f"⚡️ **Auto Reply** ⒶⒻⓀ \n🕑 **Last Seen:** {afk_time} ago\n"
+                    f"▫️ **Status**: {STATUS}"
+                )
+                coro_list(
+                    await send_animation(
+                        chat_id,
+                        animation=match.group(0),
+                        caption=out_str,
+                        reply_markup=_afk_.afk_buttons(),
+                    )
+                )
+            elif match.group(3) == "jpg" or "png":
+                coro_list(
+                    await client.send_photo(
+                        chat_id,
+                        photo=match.group(0),
+                        caption=out_str,
+                        reply_markup=_afk_.afk_buttons(),
+                    )
+                )
+                
             # url_ = LINK.strip()
             # type_, media_ = await _afk_.check_media_link(LINK)
             # if type_ == "url_gif":
