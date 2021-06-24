@@ -114,20 +114,31 @@ async def handle_afk_incomming(message: Message) -> None:
         if not (USERS[user_id][0] + USERS[user_id][1]) % randint(2, 4):
             match = _TELE_REGEX.search(REASON)
             if match:
-                r = REASON.split(" | ", maxsplit=1)
-                STATUS = r[0]
-                out_str = (
-                    f"⚡️ **Auto Reply** ⒶⒻⓀ \n🕑 **Last Seen:** {afk_time} ago\n"
-                    f"▫️ **Status**: {STATUS}"
-                )
-                coro_list.append(
-                    await chat_id.send_animation(
-                        chat_id,
-                        animation=match.group(0),
-                        caption=out_str,
-                        reply_markup=_afk_.afk_buttons(),
+                if match.group(3) == "gif" or "mp4":
+                    r = REASON.split(" | ", maxsplit=1)
+                    STATUS = r[0]
+                    out_str = (
+                        f"⚡️ **Auto Reply** ⒶⒻⓀ \n🕑 **Last Seen:** {afk_time} ago\n"
+                        f"▫️ **Status**: {STATUS}"
                     )
-                )
+                    coro_list.append(
+                        await client.send_animation(
+                            chat_id,
+                            animation=match.group(0),
+                            caption=out_str,
+                            reply_markup=_afk_.afk_buttons(),
+                        )
+                    )
+                else:
+                    if match.group(3) == "jpg" or "png" or "jpeg":
+                        coro_list.append(
+                            await client.send_animation(
+                                chat_id,
+                                photo=match.group(0),
+                                caption=out_str,
+                                reply_markup=_afk_.afk_buttons(),
+                            )
+                        )
             else:
                 out_str = (
                     f"⚡️ **Auto Reply** ⒶⒻⓀ \n🕑 **Last Seen:** {afk_time} ago\n"
@@ -141,7 +152,6 @@ async def handle_afk_incomming(message: Message) -> None:
     else:
         match = _TELE_REGEX.search(REASON)
         if match:
-            match.group(0)
             r = REASON.split(" | ", maxsplit=1)
             STATUS = r[0]
             out_str = (
