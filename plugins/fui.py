@@ -12,14 +12,14 @@ import random
 # Sleeping
 sp = (
     "I'm sleeping.",
-    "Sleeping."
+    "Sleeping.",
     "Zzz...",
 )
 SPlink = (
     "https://telegra.ph/file/ca7449b0175e38aa91173.gif",
     "https://telegra.ph/file/e24024983e40d14e6ba7c.gif",
     "https://telegra.ph/file/95d666e5638d30574688f.gif",
-    "https://telegra.ph/file/17b67e992945d187c15f8.gif"
+    "https://telegra.ph/file/17b67e992945d187c15f8.gif",
 )
 
 # Watching
@@ -37,8 +37,8 @@ WTlink = (
 # Busy
 bs = (
     "I'm busy.",
-    "Busy busy."
-    "I'm busy right now."
+    "Busy busy.",
+    "I'm busy right now.",
 )
 BSlink = (
     "https://telegra.ph/file/ccc44664b624bd2bdbbc1.gif",
@@ -74,9 +74,12 @@ async def fui_(message: Message):
     _fui = f"!afk {random.choice(sp)} | {random.choice(SPlink)}"
     await message.try_to_edit(_fui, del_in=1)
     
-    # _fui = "!afk Zzz... | https://telegra.ph/file/5f5ef5dde5e811ab753b5.gif"
-    # await message.try_to_edit(_fui, del_in=1)
-
+async def check_and_send(message: Message, *args, **kwargs):
+    replied = message.reply_to_message
+    if replied:
+        await asyncio.gather(message.delete(), replied.reply(*args, **kwargs))
+    else:
+        await message.edit(*args, **kwargs)
 
 @userge.on_cmd(
     "Fui -w$",
@@ -90,6 +93,12 @@ async def _fui(message: Message):
     fui_ = f"!afk {random.choice(wt)} | {random.choice(WTlink)}"
     await message.try_to_edit(fui_, del_in=1)
 
+async def check_and_send(message: Message, *args, **kwargs):
+    replied = message.reply_to_message
+    if replied:
+        await asyncio.gather(message.delete(), replied.reply(*args, **kwargs))
+    else:
+        await message.edit(*args, **kwargs)
 
 @userge.on_cmd(
     "Fui -b$",
