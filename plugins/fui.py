@@ -20,7 +20,7 @@ from userge import Message, userge
 )
 async def reset_(message: Message):
     """fuck"""
-    fuck = "!afk Zzz... <https://telegra.ph/file/5f5ef5dde5e811ab753b5.mp4>"
+    fuck = "!afk Zzz... | https://telegra.ph/file/5f5ef5dde5e811ab753b5.gif"
     await message.try_to_edit(fuck, del_in=1)
 
 
