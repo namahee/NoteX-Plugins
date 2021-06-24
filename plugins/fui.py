@@ -62,7 +62,7 @@ BSlink = (
 )
 async def fui_(message: Message):
     """ Executa .afk """
-    if "s" in message.flags:
+    if message.input_str == "Fui -s:
         _fui = f"!afk {random.choice(sp)} | {random.choice(SPlink)}"
         await message.try_to_edit(_fui, del_in=1)
     if "w" in message.flags:
@@ -75,7 +75,16 @@ async def fui_(message: Message):
     
     # _fui = "!afk Zzz... | https://telegra.ph/file/5f5ef5dde5e811ab753b5.gif"
     # await message.try_to_edit(_fui, del_in=1)
-
+    
+@userge.on_cmd(
+    "Fui -s$"
+    about={
+        "header": "plugin"
+    }
+)
+async def _fui(message: Message):
+    pass
+    
 
 async def check_and_send(message: Message, *args, **kwargs):
     replied = message.reply_to_message
