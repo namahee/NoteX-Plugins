@@ -116,7 +116,7 @@ async def handle_afk_incomming(message: Message) -> None:
             if match:
                 url_ = match.group(0)
                 type_, media_ = await _afk_.check_media_link(url_)
-                if type_ == "url_gif:
+                if type_ == "url_gif":
                     r = REASON.split(" | ", maxsplit=1)
                     STATUS = r[0]
                     out_str = (
