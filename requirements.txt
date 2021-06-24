@@ -19,4 +19,3 @@ pyfiglet
 qrcode
 tracemoepy
 validators
-git+https://github.com/LonamiWebs/Telethon.git
