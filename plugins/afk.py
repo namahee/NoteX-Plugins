@@ -163,7 +163,7 @@ async def handle_afk_incomming(message: Message) -> None:
                     chat_id,
                     animation=url_,
                     caption=out_str,
-                    reply_markup=_afk_.afk_time(),
+                    reply_markup=_afk_.afk_buttons(),
                 )
             else:
                 if type_ == "url_image":
