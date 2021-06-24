@@ -168,7 +168,7 @@ async def handle_afk_incomming(message: Message) -> None:
                     )
                 )
             elif match.group(3) == "jpg" or "png":
-                coro_list(
+                coro_list.append(
                     await client.send_photo(
                         chat_id,
                         photo=match.group(0),
