@@ -159,7 +159,7 @@ async def handle_afk_incomming(message: Message) -> None:
                     f"⚡️ **Auto Reply** ⒶⒻⓀ \n🕑 **Last Seen:** {afk_time} ago\n"
                     f"▫️ **Status**: {STATUS}"
                 )
-                coro_list(
+                coro_list.append(
                     await client.send_animation(
                         chat_id,
                         animation=match.group(0),
