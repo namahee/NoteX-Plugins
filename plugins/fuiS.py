@@ -5,6 +5,20 @@ from userge import Message, userge
 import random
 
 
+# Sleeping
+sp = (
+    "I'm sleeping.",
+    "Sleeping.",
+    "Zzz...",
+)
+SPlink = (
+    "https://telegra.ph/file/ca7449b0175e38aa91173.gif",
+    "https://telegra.ph/file/e24024983e40d14e6ba7c.gif",
+    "https://telegra.ph/file/95d666e5638d30574688f.gif",
+    "https://telegra.ph/file/17b67e992945d187c15f8.gif",
+)
+
+
 @userge.on_cmd(
     "Fui -s$",
     about={
