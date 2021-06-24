@@ -77,7 +77,7 @@ async def fui_(message: Message):
     # await message.try_to_edit(_fui, del_in=1)
     
 @userge.on_cmd(
-    "Fui -s$"
+    "Fui -s"
     about={
         "header": "plugin"
     }
