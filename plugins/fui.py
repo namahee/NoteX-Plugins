@@ -68,7 +68,7 @@ async def fui_(message: Message):
         # _fui = f"!afk {random.choice(wt)} | {random.choice(WTlink)}"
         # await message.try_to_edit(_fui, del_in=1)
     if "b" in message.flags:
-        _fui = f"!afk {random.choice(bs} | {random.choice(BSlink)}"
+        _fui = f"!afk {random.choice(bs)} | {random.choice(BSlink)}"
         await message.try_to_edit(_fui, del_in=1)
     
     # _fui = "!afk Zzz... | https://telegra.ph/file/5f5ef5dde5e811ab753b5.gif"
