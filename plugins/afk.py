@@ -123,12 +123,12 @@ async def handle_afk_incomming(message: Message) -> None:
                         f"⚡️ **Auto Reply** ⒶⒻⓀ \n🕑 **Last Seen:** {afk_time} ago\n"
                         f"▫️ **Status**: {STATUS}"
                     )
-                        await client.send_animation(
-                            chat_id,
-                            animation=url_,
-                            caption=out_str,
-                            reply_markup=_afk_.afk_buttons(),
-                        )
+                    await client.send_animation(
+                        chat_id,
+                        animation=url_,
+                        caption=out_str,
+                        reply_markup=_afk_.afk_buttons(),
+                    )
                 else:
                     if type_ == "url_image":
                         await client.send_photo(
