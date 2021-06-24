@@ -55,6 +55,7 @@ BSlink = (
             "-s": "Sleeping",
             "-b": "Busy",
             "-w": "Watching",
+        },
     },
 )
 async def fui(message: Message):
