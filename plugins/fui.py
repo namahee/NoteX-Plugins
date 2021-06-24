@@ -62,7 +62,7 @@ BSlink = (
 )
 async def fui_(message: Message):
     """ Executa .afk """
-    if message.input_str == "Fui -s:
+    if message.input_str == "Fui -s":
         _fui = f"!afk {random.choice(sp)} | {random.choice(SPlink)}"
         await message.try_to_edit(_fui, del_in=1)
     if "w" in message.flags:
