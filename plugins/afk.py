@@ -167,9 +167,11 @@ async def handle_afk_incomming(message: Message) -> None:
                 )
             else:
                 if type_ == "url_image":
+                    r = REASON.split(" | ", maxsplit=1)
+                    STATUS = r[0]
                     out_str = (
                         f"⚡️ **Auto Reply** ⒶⒻⓀ \n🕑 **Last Seen:** {afk_time} ago\n"
-                        f"▫️ **Status**: {STATUS_}"
+                        f"▫️ **Status**: {STATUS}"
                     )
                     await client.send_photo(
                         chat_id,
