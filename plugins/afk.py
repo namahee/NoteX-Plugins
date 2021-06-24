@@ -49,16 +49,16 @@ async def _init() -> None:
 async def active_afk(message: Message) -> None:
     """turn on or off afk mode"""
     global REASON, IS_AFK, TIME  # pylint: disable=global-statement
-    IS_AFK = True
-    TIME = time.time()
     REASON = message.input_str
     match_ = _TELE_REGEX.search(REASON)
     if match_:
+        IS_AFK = True
+        TIME = time.time()
         r_ = REASON.split(" | ", maxsplit=1)
-        STATUS_ = r_[0]
+        STATUS_ = r[0]
         await asyncio.gather(
             CHANNEL.log(f"You went AFK! : `{STATUS_}` [\u200c]({match_.group(0)})"),
-            message.edit("`You went AFK!`", del_in=1),
+            message.edit("`You went AFK`", del_in=1),
             AFK_COLLECTION.drop(),
             SAVED_SETTINGS.update_one(
                 {"_id": "AFK"},
@@ -77,6 +77,36 @@ async def active_afk(message: Message) -> None:
                 upsert=True,
             ),
         )
+        
+   
+    # IS_AFK = True
+    # TIME = time.time()
+    # REASON = message.input_str
+    # match_ = _TELE_REGEX.search(REASON)
+    # if match_:
+        # r_ = REASON.split(" | ", maxsplit=1)
+        # STATUS_ = r_[0]
+        # await asyncio.gather(
+            # CHANNEL.log(f"You went AFK! : `{STATUS_}` [\u200c]({match_.group(0)})"),
+            # message.edit("`You went AFK!`", del_in=1),
+            # AFK_COLLECTION.drop(),
+            # SAVED_SETTINGS.update_one(
+                # {"_id": "AFK"},
+                # {"$set": {"on": True, "data": STATUS_, "time": TIME}},
+                # upsert=True,
+            # ),
+        # )
+    # else:
+        # await asyncio.gather(
+            # CHANNEL.log(f"You went AFK! : `{REASON}`"),
+            # message.edit("`You went AFK!`", del_in=1),
+            # AFK_COLLECTION.drop(),
+            # SAVED_SETTINGS.update_one(
+                # {"_id": "AFK"},
+                # {"set": {"on": True, "data": REASON, "time": TIME}},
+                # upsert=True,
+            # ),
+        # )
 
 
 @userge.on_filters(
