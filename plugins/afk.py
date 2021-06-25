@@ -242,8 +242,8 @@ async def handle_afk_incomming(message: Message) -> None:
 
 class _afk_:
     def out_str() -> str:
-        r = REASON.split(" | ", maxsplit=1)
-        STATUS = r[0]
+        # r = REASON.split(" | ", maxsplit=1)
+        # STATUS = r[0]
         out_str = (
             f"⚡️ **Auto Reply** ⒶⒻⓀ \n🕑 **Last Seen:** {afk_time} ago\n"
             f"▫️ **Status**: {STATUS}"
