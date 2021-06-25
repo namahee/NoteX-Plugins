@@ -55,7 +55,7 @@ async def active_afk(message: Message) -> None:
     match_ = _TELE_REGEX.search(REASON)
     if match_:
         r_ = REASON.split(" | ", maxsplit=1)
-        STATUS_ = r[0]
+        STATUS_ = r_[0]
         await asyncio.gather(
             CHANNEL.log(f"You went AFK! : `{STATUS_}` [\u200c]({match_.group(0)})"),
             message.edit("`You went AFK`", del_in=1),
