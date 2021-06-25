@@ -162,7 +162,7 @@ async def handle_afk_incomming(message: Message) -> None:
                     await client.send_photo(
                         chat_id,
                         photo=match.group(0),
-                        caption=out_str,
+                        caption=_afk_.out_str(),
                         reply_markup=_afk_.afk_buttons(),
                     )
             else:
@@ -196,7 +196,7 @@ async def handle_afk_incomming(message: Message) -> None:
                 await client.send_photo(
                     chat_id,
                     photo=match.group(0),
-                    caption=out_str,
+                    caption=_afk_.out_str(),
                     reply_markup=_afk_.afk_buttons(),
                 )
         else:
@@ -241,6 +241,14 @@ async def handle_afk_incomming(message: Message) -> None:
 
 
 class _afk_:
+    def out_str() -> str:
+        r = REASON.split(" | ", maxsplit=1)
+        STATUS = r[0]
+        out_str = (
+            f"⚡️ **Auto Reply** ⒶⒻⓀ \n🕑 **Last Seen:** {afk_time} ago\n"
+            f"▫️ **Status**: {STATUS}"
+        )
+    
     async def check_media_link(media_link: str):
         match_ = _TELE_REGEX.search(media_link.strip())
         if not match_:
