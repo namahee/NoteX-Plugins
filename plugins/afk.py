@@ -116,16 +116,16 @@ async def handle_afk_incomming(message: Message) -> None:
             if match:
                 type_, media_ = await _afk_.check_media_link(match.group(0))
                 if type_ == "url_gif":
-                    r = REASON.split(" | ", maxsplit=1)
-                    STATUS = r[0]
-                    out_str = (
-                        f"⚡️ **Auto Reply** ⒶⒻⓀ \n ╰•  **Last Check:** {afk_time} ago\n\n"
-                        f"▫️ **I'm not here because:**\n {STATUS}"
-                    )
+                    # r = REASON.split(" | ", maxsplit=1)
+                    # STATUS = r[0]
+                    # out_str = (
+                        # f"⚡️ **Auto Reply** ⒶⒻⓀ \n ╰•  **Last Check:** {afk_time} ago\n\n"
+                        # f"▫️ **I'm not here because:**\n {STATUS}"
+                    # )
                     await client.send_animation(
                         chat_id,
                         animation=match.group(0),
-                        caption=out_str,
+                        caption=_afk_.out_str(),
                         reply_markup=_afk_.afk_buttons(),
                     )
                 elif type_ == "url_image":
@@ -136,11 +136,13 @@ async def handle_afk_incomming(message: Message) -> None:
                         reply_markup=_afk_.afk_buttons(),
                     )
             else:
-                out_str = (
-                    f"⚡️ **Auto Reply** ⒶⒻⓀ \n ╰•  **Last Check:** {afk_time} ago\n\n"
-                    f"▫️ **I'm not here because:**\n {REASON}"
+                # out_str = (
+                    # f"⚡️ **Auto Reply** ⒶⒻⓀ \n ╰•  **Last Check:** {afk_time} ago\n\n"
+                    # f"▫️ **I'm not here because:**\n {REASON}"
+                # )
+                coro_list.append(
+                    message.reply(_afk_._out_str())
                 )
-                coro_list.append(message.reply(out_str))
         if chat.type == "private":
             USERS[user_id][0] += 1
         else:
@@ -150,16 +152,16 @@ async def handle_afk_incomming(message: Message) -> None:
         if match:
             type_, media_ = await _afk_.check_media_link(match.group(0))
             if type_ == "url_gif":
-                r = REASON.split(" | ", maxsplit=1)
-                STATUS = r[0]
-                out_str = (
-                    f"⚡️ **Auto Reply** ⒶⒻⓀ \n ╰•  **Last Check:** {afk_time} ago\n\n"
-                    f"▫️ **I'm not here because:**\n {STATUS}"
-                )
+                # r = REASON.split(" | ", maxsplit=1)
+                # STATUS = r[0]
+                # out_str = (
+                    # f"⚡️ **Auto Reply** ⒶⒻⓀ \n ╰•  **Last Check:** {afk_time} ago\n\n"
+                    # f"▫️ **I'm not here because:**\n {STATUS}"
+                # )
                 await client.send_animation(
                     chat_id,
                     animation=match.group(0),
-                    caption=out_str,
+                    caption=_afk_.out_str(),
                     reply_markup=_afk_.afk_buttons(),
                 )
             elif type_ == "url_image":
@@ -170,11 +172,13 @@ async def handle_afk_incomming(message: Message) -> None:
                     reply_markup=_afk_.afk_buttons(),
                 )
         else:
-            out_str = (
-                f"⚡️ **Auto Reply** ⒶⒻⓀ \n ╰•  **Last Check:** {afk_time} ago\n\n"
-                f"▫️ **I'm not here because:**\n {REASON}"
+            # out_str = (
+                # f"⚡️ **Auto Reply** ⒶⒻⓀ \n ╰•  **Last Check:** {afk_time} ago\n\n"
+                # f"▫️ **I'm not here because:**\n {REASON}"
+            # )
+            coro_list.append(
+                message.reply(_afk_._out_str())
             )
-            coro_list.append(message.reply(out_str))
         if chat.type == "private":
             USERS[user_id] = [1, 0, user_dict["mention"]]
         else:
@@ -218,6 +222,14 @@ class _afk_:
         out_str = (
             f"⚡️ **Auto Reply** ⒶⒻⓀ \n ╰•  **Last Check:** {_afk_time} ago\n\n"
             f"▫️ **I'm not here because:**\n {_STATUS}"
+        )
+        return out_str
+        
+    def _out_str() -> str:
+        afk_time_ = time_formatter(round(time.time() - TIME))
+        out_str = (
+            f"⚡️ **Auto Reply** ⒶⒻⓀ \n ╰•  **Last Check:** {afk_time_} ago.\n\n"
+            f"▫️ **I'm not here because:**\n {REASON}"
         )
         return out_str
     
