@@ -114,8 +114,7 @@ async def handle_afk_incomming(message: Message) -> None:
         if not (USERS[user_id][0] + USERS[user_id][1]) % randint(2, 4):
             match = _TELE_REGEX.search(REASON)
             if match:
-                url_ = match.group(0)
-                type_, media_ = await _afk_.check_media_link(url_)
+                type_, media_ = await _afk_.check_media_link(match.group(0))
                 if type_ == "url_gif":
                     r = REASON.split(" | ", maxsplit=1)
                     STATUS = r[0]
@@ -125,24 +124,17 @@ async def handle_afk_incomming(message: Message) -> None:
                     )
                     await client.send_animation(
                         chat_id,
-                        animation=url_,
+                        animation=match.group(0),
                         caption=out_str,
                         reply_markup=_afk_.afk_buttons(),
                     )
-                else:
-                    if type_ == "url_image":
-                        r = REASON.split(" | ", maxsplit=1)
-                        STATUS = r[0]
-                        out_str = (
-                            f"⚡️ **Auto Reply** ⒶⒻⓀ \n🕑 **Last Seen:** {afk_time} ago\n"
-                            f"▫️ **Status**: {STATUS}"
-                        )
-                        await client.send_photo(
-                            chat_id,
-                            photo=url_,
-                            caption=out_str,
-                            reply_markup=_afk_.afk_buttons(),
-                        )
+                elif type_ == "url_image":
+                    await client.send_photo(
+                        chat_id,
+                        photo=match.group(0),
+                        caption=_afk_.out_str(),
+                        reply_markup=_afk_.afk_buttons(),
+                    )
             else:
                 out_str = (
                     f"⚡️ **Auto Reply** ⒶⒻⓀ \n🕑 **Last Seen:** {afk_time} ago\n"
@@ -156,8 +148,7 @@ async def handle_afk_incomming(message: Message) -> None:
     else:
         match = _TELE_REGEX.search(REASON)
         if match:
-            url_ = match.group(0)
-            type_, media_ = await _afk_.check_media_link(url_)
+            type_, media_ = await _afk_.check_media_link(match.group(0))
             if type_ == "url_gif":
                 r = REASON.split(" | ", maxsplit=1)
                 STATUS = r[0]
@@ -167,41 +158,17 @@ async def handle_afk_incomming(message: Message) -> None:
                 )
                 await client.send_animation(
                     chat_id,
-                    animation=url_,
+                    animation=match.group(0),
                     caption=out_str,
                     reply_markup=_afk_.afk_buttons(),
                 )
-            else:
-                if type_ == "url_image":
-                    r = REASON.split(" | ", maxsplit=1)
-                    STATUS = r[0]
-                    out_str = (
-                        f"⚡️ **Auto Reply** ⒶⒻⓀ \n🕑 **Last Seen:** {afk_time} ago\n"
-                        f"▫️ **Status**: {STATUS}"
-                    )
-                    await client.send_photo(
-                        chat_id,
-                        photo=url_,
-                        caption=out_str,
-                        reply_markup=_afk_.afk_buttons(),
-                    )
-                
-            # url_ = LINK.strip()
-            # type_, media_ = await _afk_.check_media_link(LINK)
-            # if type_ == "url_gif":
-            # await client.send_animation(
-            # chat_id,
-            # animation=url_,
-            # caption=out_str,
-            # reply_markup=_afk_.afk_buttons(),
-            # )
-            # elif type_ == "url_image":
-            # await client.send_photo(
-            # chat_id,
-            # photo=url_,
-            # caption=out_str,
-            # reply_markup=_afk_.afk_buttons(),
-            # )
+            elif type_ == "url_image":
+                await client.send_photo(
+                    chat_id,
+                    photo=match.group(0),
+                    caption=_afk_.out_str(),
+                    reply_markup=_afk_.afk_buttons(),
+                )
         else:
             out_str = (
                 f"⚡️ **Auto Reply** ⒶⒻⓀ \n🕑 **Last Seen:** {afk_time} ago\n"
@@ -244,6 +211,16 @@ async def handle_afk_incomming(message: Message) -> None:
 
 
 class _afk_:
+    def out_str() -> str:
+        _afk_time = time_formatter(round(time.time() - TIME))
+        _r = REASON.split(" | ", maxsplit=1)
+        _STATUS = _r[0]
+        out_str = (
+            f"⚡️ **Auto Reply** ⒶⒻⓀ \n🕑 **Last Seen:** {_afk_time} ago\n"
+            f"▫️ **Status**: {_STATUS}"
+        )
+        return out_str
+    
     async def check_media_link(media_link: str):
         match_ = _TELE_REGEX.search(media_link.strip())
         if not match_:
