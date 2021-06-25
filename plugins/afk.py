@@ -11,7 +11,7 @@ from userge import Config, Message, filters, get_collection, userge
 from userge.utils import time_formatter
 
 _TELE_REGEX = comp_regex(
-    r"http[s]?://(i\.imgur\.com|telegra\.ph/file|t\.me)/(\w+)(?:\.|/)(gif|jpg|png|jpeg|[0-9]+)(?:/([0-9]+))?"
+    r"http[s]?://(i\.imgur\.com|telegra\.ph/file|t\.me)/(\w+)(?:\.|/)(gif|mp4|jpg|png|jpeg|[0-9]+)(?:/([0-9]+))?"
 )
 
 CHANNEL = userge.getCLogger(__name__)
@@ -120,7 +120,7 @@ async def handle_afk_incomming(message: Message) -> None:
                     STATUS = r[0]
                     out_str = (
                         f"⚡️ **Auto Reply** ⒶⒻⓀ \n ╰•  **Last Check:** {afk_time} ago\n\n"
-                        f"▫️ **I'm not here because:**\n\n {STATUS}"
+                        f"▫️ **I'm not here because:**\n {STATUS}"
                     )
                     await client.send_animation(
                         chat_id,
@@ -137,8 +137,8 @@ async def handle_afk_incomming(message: Message) -> None:
                     )
             else:
                 out_str = (
-                    f"⚡️ **Auto Reply** ⒶⒻⓀ \n🕑 **Last Seen:** {afk_time} ago\n"
-                    f"▫️ **Status**: {REASON}"
+                    f"⚡️ **Auto Reply** ⒶⒻⓀ \n ╰•  **Last Check:** {afk_time} ago\n\n"
+                    f"▫️ **I'm not here because:**\n {REASON}"
                 )
                 coro_list.append(message.reply(out_str))
         if chat.type == "private":
@@ -153,8 +153,8 @@ async def handle_afk_incomming(message: Message) -> None:
                 r = REASON.split(" | ", maxsplit=1)
                 STATUS = r[0]
                 out_str = (
-                    f"⚡️ **Auto Reply** ⒶⒻⓀ \n🕑 **Last Seen:** {afk_time} ago\n"
-                    f"▫️ **Status**: {STATUS}"
+                    f"⚡️ **Auto Reply** ⒶⒻⓀ \n ╰•  **Last Check:** {afk_time} ago\n\n"
+                    f"▫️ **I'm not here because:**\n {STATUS}"
                 )
                 await client.send_animation(
                     chat_id,
@@ -171,8 +171,8 @@ async def handle_afk_incomming(message: Message) -> None:
                 )
         else:
             out_str = (
-                f"⚡️ **Auto Reply** ⒶⒻⓀ \n🕑 **Last Seen:** {afk_time} ago\n"
-                f"▫️ **Status**: {REASON}"
+                f"⚡️ **Auto Reply** ⒶⒻⓀ \n ╰•  **Last Check:** {afk_time} ago\n\n"
+                f"▫️ **I'm not here because:**\n {REASON}"
             )
             coro_list.append(message.reply(out_str))
         if chat.type == "private":
@@ -216,8 +216,8 @@ class _afk_:
         _r = REASON.split(" | ", maxsplit=1)
         _STATUS = _r[0]
         out_str = (
-            f"⚡️ **Auto Reply** ⒶⒻⓀ \n🕑 **Last Seen:** {_afk_time} ago\n"
-            f"▫️ **Status**: {_STATUS}"
+            f"⚡️ **Auto Reply** ⒶⒻⓀ \n ╰•  **Last Check:** {_afk_time} ago\n\n"
+            f"▫️ **I'm not here because:**\n {_STATUS}"
         )
         return out_str
     
@@ -230,7 +230,7 @@ class _afk_:
             link_type = "url_gif" if match_.group(3) == "gif" else "url_image"
         elif match_.group(1) == "telegra.ph/file":
             link = match_.group(0)
-            link_type = "url_gif" if match_.group(3) == "gif" else "url_image"
+            link_type = "url_gif" if match_.group(3) == "gif" or "mp4" else "url_image"
         else:
             link_type = "tg_media"
             if match_.group(2) == "c":
