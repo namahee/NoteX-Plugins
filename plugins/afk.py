@@ -119,8 +119,8 @@ async def handle_afk_incomming(message: Message) -> None:
                     r = REASON.split(" | ", maxsplit=1)
                     STATUS = r[0]
                     out_str = (
-                        f"⚡️ **Auto Reply** ⒶⒻⓀ \n🕑 **Last Seen:** {afk_time} ago\n"
-                        f"▫️ **Status**: {STATUS}"
+                        f"⚡️ **Auto Reply** ⒶⒻⓀ \n ╰•  **Last Check:** {afk_time} ago\n\n"
+                        f"▫️ **I'm not here because:**\n\n {STATUS}"
                     )
                     await client.send_animation(
                         chat_id,
