@@ -242,11 +242,12 @@ async def handle_afk_incomming(message: Message) -> None:
 
 class _afk_:
     def out_str() -> str:
-        # r = REASON.split(" | ", maxsplit=1)
-        # STATUS = r[0]
+        _afk_time = time_formatter(round(time.time() - TIME))
+        _r = REASON.split(" | ", maxsplit=1)
+        _STATUS = _r[0]
         out_str = (
-            f"⚡️ **Auto Reply** ⒶⒻⓀ \n🕑 **Last Seen:** {afk_time} ago\n"
-            f"▫️ **Status**: {STATUS}"
+            f"⚡️ **Auto Reply** ⒶⒻⓀ \n🕑 **Last Seen:** {_afk_time} ago\n"
+            f"▫️ **Status**: {_STATUS}"
         )
     
     async def check_media_link(media_link: str):
