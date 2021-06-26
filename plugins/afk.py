@@ -122,6 +122,7 @@ async def handle_afk_incomming(message: Message) -> None:
                         # f"⚡️ **Auto Reply** ⒶⒻⓀ \n ╰•  **Last Check:** {afk_time} ago\n\n"
                         # f"▫️ **I'm not here because:**\n {STATUS}"
                     # )
+                    reply = message.reply_to_message
                     reply_id = reply.message_id if reply else None
                     await client.send_animation(
                         chat_id,
@@ -131,6 +132,7 @@ async def handle_afk_incomming(message: Message) -> None:
                         reply_markup=_afk_.afk_buttons(),
                     )
                 elif type_ == "url_image":
+                    reply = message.reply_to_message
                     reply_id = reply.message_id if reply else None
                     await client.send_photo(
                         chat_id,
@@ -162,6 +164,7 @@ async def handle_afk_incomming(message: Message) -> None:
                     # f"⚡️ **Auto Reply** ⒶⒻⓀ \n ╰•  **Last Check:** {afk_time} ago\n\n"
                     # f"▫️ **I'm not here because:**\n {STATUS}"
                 # )
+                reply = message.reply_to_message
                 reply_id = reply.message_id if reply else None
                 await client.send_animation(
                     chat_id,
@@ -171,6 +174,7 @@ async def handle_afk_incomming(message: Message) -> None:
                     reply_markup=_afk_.afk_buttons(),
                 )
             elif type_ == "url_image":
+                reply = message.reply_to_message
                 reply_id = reply.message_id if reply else None
                 await client.send_photo(
                     chat_id,
