@@ -125,7 +125,7 @@ async def handle_afk_incomming(message: Message) -> None:
                     reply = message.reply_to_message
                     reply_id = reply.message_id if reply else None
                     await client.send_animation(
-                        chat_id,
+                        chat_id=message.chat.id,
                         animation=match.group(0),
                         caption=_afk_.out_str(),
                         reply_to_message_id=reply_id,
@@ -135,7 +135,7 @@ async def handle_afk_incomming(message: Message) -> None:
                     reply = message.reply_to_message
                     reply_id = reply.message_id if reply else None
                     await client.send_photo(
-                        chat_id,
+                        chat_id=message.chat.id,
                         photo=match.group(0),
                         caption=_afk_.out_str(),
                         reply_to_message_id=reply_id,
@@ -167,7 +167,7 @@ async def handle_afk_incomming(message: Message) -> None:
                 reply = message.reply_to_message
                 reply_id = reply.message_id if reply else None
                 await client.send_animation(
-                    chat_id,
+                    chat_id=message.chat.id,
                     animation=match.group(0),
                     caption=_afk_.out_str(),
                     reply_to_message_id=reply_id,
@@ -177,7 +177,7 @@ async def handle_afk_incomming(message: Message) -> None:
                 reply = message.reply_to_message
                 reply_id = reply.message_id if reply else None
                 await client.send_photo(
-                    chat_id,
+                    chat_id=message.chat.id,
                     photo=match.group(0),
                     caption=_afk_.out_str(),
                     reply_to_message_id=reply_id,
