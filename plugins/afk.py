@@ -122,17 +122,12 @@ async def handle_afk_incomming(message: Message) -> None:
                         # f"⚡️ **Auto Reply** ⒶⒻⓀ \n ╰•  **Last Check:** {afk_time} ago\n\n"
                         # f"▫️ **I'm not here because:**\n {STATUS}"
                     # )
-                    await InlineQueryResultAnimation(
-                        animation_url=match.group(0),
+                    await client.send_animation(
+                        chat_id,
+                        animation=match.group(0),
                         caption=_afk_.out_str(),
                         reply_markup=_afk_.afk_buttons(),
                     )
-                    # await client.send_animation(
-                        # chat_id,
-                        # animation=match.group(0),
-                        # caption=_afk_.out_str(),
-                        # reply_markup=_afk_.afk_buttons(),
-                    # )
                 elif type_ == "url_image":
                     await client.send_photo(
                         chat_id,
@@ -175,17 +170,12 @@ async def handle_afk_incomming(message: Message) -> None:
                         ),
                     ],
                 ]
-                await InlineQueryResultAnimation(
-                    animation_url=match.group(0),
+                await client.send_animation(
+                    chat_id,
+                    animation=match.group(0),
                     caption=_afk_.out_str(),
                     reply_markup=_afk_.afk_buttons(),
                 )
-                # await client.send_animation(
-                    # chat_id,
-                    # animation=match.group(0),
-                    # caption=_afk_.out_str(),
-                    # reply_markup=_afk_.afk_buttons(),
-                # )
             elif type_ == "url_image":
                 await client.send_photo(
                     chat_id,
