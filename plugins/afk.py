@@ -5,7 +5,7 @@ import time
 from random import randint
 from re import compile as comp_regex
 
-from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
+from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, InlineQueryResultAnimation
 
 from userge import Config, Message, filters, get_collection, userge
 from userge.utils import time_formatter
@@ -158,12 +158,32 @@ async def handle_afk_incomming(message: Message) -> None:
                     # f"⚡️ **Auto Reply** ⒶⒻⓀ \n ╰•  **Last Check:** {afk_time} ago\n\n"
                     # f"▫️ **I'm not here because:**\n {STATUS}"
                 # )
-                await client.send_animation(
-                    chat_id,
-                    animation=match.group(0),
-                    caption=_afk_.out_str(),
-                    reply_markup=_afk_.afk_buttons(),
+                buttons = [
+                    [
+                        InlineKeyboardButton(
+                            "REPO", url=Config.UPSTREAM_REPO
+                        ),
+                    ],
+                    [
+                        InlineKeyboardButton(
+                            "CONTACT", url="https://t.me/NoteZV"
+                        ),
+                    ],
+                ]
+                coro_list.append(
+                    InlineQueryResultAnimation(
+                        animation_url=match.group(0),
+                        caption=_afk_.out_str(),
+                        reply_markup=_afk_.afk_buttons(),
+                    )
                 )
+                
+                # await client.send_animation(
+                    # chat_id,
+                    # animation=match.group(0),
+                    # caption=_afk_.out_str(),
+                    # reply_markup=_afk_.afk_buttons(),
+                # )
             elif type_ == "url_image":
                 await client.send_photo(
                     chat_id,
@@ -257,8 +277,15 @@ class _afk_:
     def afk_buttons() -> InlineKeyboardMarkup:
         buttons = [
             [
-                InlineKeyboardButton(text="REPO", url=Config.UPSTREAM_REPO),
-            ]
+                InlineKeyboardButton(
+                    "REPO", url=Config.UPSTREAM_REPO
+                ),
+            ],
+            [
+                InlineKeyboardButton(
+                    "CONTACT", url="https://t.me/NoteZV"
+                ),
+            ],
         ]
         return InlineKeyboardMarkup(buttons)
 
