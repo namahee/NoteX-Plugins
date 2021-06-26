@@ -5,10 +5,6 @@ import time
 from random import randint
 from re import compile as comp_regex
 
-
-from userge.plugins.bot.alive import Bot_Alive
-
-
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, InlineQueryResultAnimation
 
 from userge import Config, Message, filters, get_collection, userge
@@ -130,7 +126,7 @@ async def handle_afk_incomming(message: Message) -> None:
                         chat_id,
                         animation=match.group(0),
                         caption=_afk_.out_str(),
-                        reply_markup=Bot_Alive.alive_buttons(),
+                        reply_markup=_afk_.afk_buttons(),
                     )
                 elif type_ == "url_image":
                     await client.send_photo(
