@@ -10,7 +10,7 @@ from pyrogram.errors import BadRequest, FloodWait, Forbidden, MediaEmpty
 from userge import Config, Message, filters, get_collection, userge
 from userge.utils import time_formatter
 
-from afk_inline import send_inline_afk, send_inline_afk_, _send_inline_afk
+# from afk_inline import send_inline_afk, send_inline_afk_, _send_inline_afk
 
 _TELE_REGEX = comp_regex(
     r"http[s]?://(i\.imgur\.com|telegra\.ph/file|t\.me)/(\w+)(?:\.|/)(gif|mp4|jpg|png|jpeg|[0-9]+)(?:/([0-9]+))?"
