@@ -276,7 +276,7 @@ class _afk_:
         return out_str
     
     def link() -> str:
-       _match_ =  _TELE_REGEX.search(REASON)
+        _match_ =  _TELE_REGEX.search(REASON)
         if _match_:
             link = match.group(0)
             return link
