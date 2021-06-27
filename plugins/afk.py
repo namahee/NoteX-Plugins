@@ -101,35 +101,35 @@ async def active_afk(message: Message) -> None:
 )
 
 
-# async def afk_inline(message: Message):
-    # bot = await userge.bot.get_me()
-    # x = await userge.get_inline_bot_results(bot.username, "afk")
-    # await userge.send_inline_bot_result(
-        # chat_id=message.chat.id, query_id=x.query_id, result_id=x.results[0].id
-    # )
-    # await message.delete()
-    
-async def send_inline_afk(message: Message) -> None:
-    _bot = await userge.bot.get_me()
-    try:
-        i_res = await userge.get_inline_bot_results(_bot.username, "afk")
-        i_res_id = (
-            (
-                await userge.send_inline_bot_result(
-                    chat_id=message.chat.id,
-                    query_id=i_res.query_id,
-                    result_id=i_res.results[0].id,
-                )
-            )
-            .updates[0]
-            .id
-        )
-    except (Forbidden, BadRequest) as ex:
-        await message.err(str(ex), del_in=5)
-        return
+async def afk_inline(message: Message):
+    bot = await userge.bot.get_me()
+    x = await userge.get_inline_bot_results(bot.username, "afk")
+    await userge.send_inline_bot_result(
+        chat_id=message.chat.id, query_id=x.query_id, result_id=x.results[0].id
+    )
     await message.delete()
-    await asyncio.sleep(60)
-    await userge.delete_messages(message.chat.id, i_res_id)
+    
+# async def send_inline_afk(message: Message) -> None:
+    # _bot = await userge.bot.get_me()
+    # try:
+        # i_res = await userge.get_inline_bot_results(_bot.username, "afk")
+        # i_res_id = (
+            # (
+                # await userge.send_inline_bot_result(
+                    # chat_id=message.chat.id,
+                    # query_id=i_res.query_id,
+                    # result_id=i_res.results[0].id,
+                # )
+            # )
+            # .updates[0]
+            # .id
+        # )
+    # except (Forbidden, BadRequest) as ex:
+        # await message.err(str(ex), del_in=5)
+        # return
+    # await message.delete()
+    # await asyncio.sleep(60)
+    # await userge.delete_messages(message.chat.id, i_res_id)
 
 
 async def handle_afk_incomming(message: Message) -> None:
