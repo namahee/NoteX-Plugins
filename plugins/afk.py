@@ -195,9 +195,7 @@ async def handle_afk_incomming(message: Message) -> None:
             type_, media_ = await _afk_.check_media_link(match.group(0))
             if not type_ == "url_gif":
                 if type_ == "url_image":
-                    coro_list.append(
-                        await send_inline_afk_(message)
-                    )
+                    await send_inline_afk_(message)
             else:
                 if type_ == "url_gif":
                     coro_list.append(
