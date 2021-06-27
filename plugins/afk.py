@@ -148,9 +148,11 @@ async def handle_afk_incomming(message: Message) -> None:
             if match:
                 type_, media_ = await _afk_.check_media_link(match.group(0))
                 if type_ == "url_image":
-                    await send_inline_afk_(message)
-                elif type_ == "url_gid":
-                    await send_inline_afk(message)
+                    pass
+                    # await send_inline_afk_(message)
+                elif type_ == "url_gif":
+                    pass
+                    # await send_inline_afk(message)
                     # NOT
                     # r = REASON.split(" | ", maxsplit=1)
                     # STATUS = r[0]
@@ -193,9 +195,11 @@ async def handle_afk_incomming(message: Message) -> None:
         if match:
             type_, media_ = await _afk_.check_media_link(match.group(0))
             if type_ == "url_image":
-                await send_inline_afk_(message)
+                pass
+                # await send_inline_afk_(message)
             elif type_ == "url_gif":
-                await send_inline_afk(message)
+                pass
+                # await send_inline_afk(message)
                 # r = REASON.split(" | ", maxsplit=1)
                 # STATUS = r[0]
                 # out_str = (
