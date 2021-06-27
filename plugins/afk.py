@@ -192,10 +192,12 @@ async def handle_afk_incomming(message: Message) -> None:
         match = _TELE_REGEX.search(REASON)
         if match:
             type_, media_ = await _afk_.check_media_link(match.group(0))
-            if type_ == "url_gif":
-                await send_inline_afk(message)
-            if type_ == "url_image":
-                await send_inline_afk_(message)
+            if not type_ == "url_gif":
+                if type_ == "url_image":
+                    await send_inline_afk_(message)
+            else:
+                if type_ == "url_gif":
+                    await send_inline_afk(message)
                 # r = REASON.split(" | ", maxsplit=1)
                 # STATUS = r[0]
                 # out_str = (
@@ -295,7 +297,7 @@ class _afk_:
             link_type = "url_gif" if match_.group(3) == "gif" else "url_image"
         elif match_.group(1) == "telegra.ph/file":
             link = match_.group(0)
-            link_type = "url_image" if match_.group(3) == "jpg" else "url_gif"
+            link_type = "url_gif" if match_.group(3) == "gif" or "mp4" else "url_image"
         else:
             link_type = "tg_media"
             if match_.group(2) == "c":
