@@ -100,8 +100,23 @@ async def active_afk(message: Message) -> None:
     allow_via_bot=False,
 )
 
-
-async def afk_inline(message: Message):
+async def send_inline_afk(message: Message):
+    bot = await userge.bot.get_me()
+    x = await userge.get_inline_bot_results(bot.username, "afk")
+    await userge.send_inline_bot_result(
+        chat_id=message.chat.id, query_id=x.query_id, result_id=x.results[0].id
+    )
+    await message.delete()
+    
+async def send_inline_afk_(message: Message):
+    bot = await userge.bot.get_me()
+    x = await userge.get_inline_bot_results(bot.username, "afk_")
+    await userge.send_inline_bot_result(
+        chat_id=message.chat.id, query_id=x.query_id, result_id=x.results[0].id
+    )
+    await message.delete()
+    
+async def _send_inline_afk(message: Message):
     bot = await userge.bot.get_me()
     x = await userge.get_inline_bot_results(bot.username, "gesso")
     await userge.send_inline_bot_result(
@@ -152,6 +167,8 @@ async def handle_afk_incomming(message: Message) -> None:
                 type_, media_ = await _afk_.check_media_link(match.group(0))
                 if type_ == "url_gif":
                     await send_inline_afk(message)
+                elif type_ == "url_image":
+                    await send_inline_afk_(message)
                     # NOT
                     # r = REASON.split(" | ", maxsplit=1)
                     # STATUS = r[0]
@@ -180,8 +197,11 @@ async def handle_afk_incomming(message: Message) -> None:
                     # f"▫️ **I'm not here because:**\n {REASON}"
                 # )
                 coro_list.append(
-                    message.reply(_afk_._out_str())
+                    await _send_inline_afk(message)
                 )
+                # coro_list.append(
+                    # message.reply(_afk_._out_str())
+                # )
         if chat.type == "private":
             USERS[user_id][0] += 1
         else:
@@ -189,11 +209,11 @@ async def handle_afk_incomming(message: Message) -> None:
     else:
         match = _TELE_REGEX.search(REASON)
         if match:
-            await send_inline_afk(message)
-            
-            # type_, media_ = await _afk_.check_media_link(match.group(0))
-            # if type_ == "url_gif":
-                # await send_inline_afk(message)
+            type_, media_ = await _afk_.check_media_link(match.group(0))
+            if type_ == "url_gif":
+                await send_inline_afk(message)
+            elif type_ == "url_image":
+                await send_inline_afk_(message)
                 # r = REASON.split(" | ", maxsplit=1)
                 # STATUS = r[0]
                 # out_str = (
@@ -219,8 +239,11 @@ async def handle_afk_incomming(message: Message) -> None:
                 # f"▫️ **I'm not here because:**\n {REASON}"
             # )
             coro_list.append(
-                message.reply(_afk_._out_str())
+                await _send_inline_afk(message)
             )
+            # coro_list.append(
+                # message.reply(_afk_._out_str())
+            # )
         if chat.type == "private":
             USERS[user_id] = [1, 0, user_dict["mention"]]
         else:
