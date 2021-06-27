@@ -195,13 +195,11 @@ async def handle_afk_incomming(message: Message) -> None:
             type_, media_ = await _afk_.check_media_link(match.group(0))
             if not match.group(3) == "gif":
                 if match.group(3) == "jpg":
-                    await message.reply_text(f"{match.group(3)}")
-                    # await send_inline_afk_(message)
+                    await send_inline_afk_(message)
             else:
                 if match.group(3) == "gif":
                     coro_list.append(
-                        await message.reply_text(f"{match.group(3)}")
-                        # await send_inline_afk(message)
+                        await send_inline_afk(message)
                     )
                 # r = REASON.split(" | ", maxsplit=1)
                 # STATUS = r[0]
@@ -275,7 +273,7 @@ class _afk_:
         _STATUS = _r[0]
         out_str = (
             f"⚡️ **Auto Reply** ⒶⒻⓀ \n ╰•  **Last Check:** {_afk_time} ago\n\n"
-            f"▫️ **I'm not here because:**\n {_STATUS}"
+            f"▫️ **I'm not here because:**\n {_STATUS}\n\n{match.group(3})"
         )
         return out_str
         
