@@ -6,6 +6,7 @@ from random import randint
 from re import compile as comp_regex
 
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
+from pyrogram.errors import BadRequest, FloodWait, Forbidden, MediaEmpty
 
 from userge import Config, Message, filters, get_collection, userge
 from userge.utils import time_formatter
