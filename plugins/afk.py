@@ -273,10 +273,10 @@ class _afk_:
         )
         return out_str
     
-    def link():
+    def link() -> str:
         _match_ =  _TELE_REGEX.search(REASON)
         if _match_:
-            link = match.group(0)
+            link = _match_.group(0)
             return link
     
     async def check_media_link(media_link: str):
