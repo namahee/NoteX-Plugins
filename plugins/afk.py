@@ -122,33 +122,7 @@ async def handle_afk_incomming(message: Message) -> None:
                     await send_inline_afk_(message)
                 elif type_ == "url_gif":
                     await send_inline_afk(message)
-                    # NOT
-                    # r = REASON.split(" | ", maxsplit=1)
-                    # STATUS = r[0]
-                    # out_str = (
-                        # f"⚡️ **Auto Reply** ⒶⒻⓀ \n ╰•  **Last Check:** {afk_time} ago\n\n"
-                        # f"▫️ **I'm not here because:**\n {STATUS}"
-                    # )
-                    # NOT
-
-                    # await client.send_animation(
-                        # chat_id,
-                        # animation=match.group(0),
-                        # caption=_afk_.out_str(),
-                        # reply_markup=_afk_.afk_buttons(),
-                    # )
-                # elif type_ == "url_image":
-                    # await client.send_photo(
-                        # chat_id,
-                        # photo=match.group(0),
-                        # caption=_afk_.out_str(),
-                        # reply_markup=_afk_.afk_buttons(),
-                    # )
             else:
-                # out_str = (
-                    # f"⚡️ **Auto Reply** ⒶⒻⓀ \n ╰•  **Last Check:** {afk_time} ago\n\n"
-                    # f"▫️ **I'm not here because:**\n {REASON}"
-                # )
                 coro_list.append(
                     await _send_inline_afk(message)
                 )
@@ -167,30 +141,7 @@ async def handle_afk_incomming(message: Message) -> None:
                 await send_inline_afk_(message)
             elif type_ == "url_gif":
                 await send_inline_afk(message)
-                # r = REASON.split(" | ", maxsplit=1)
-                # STATUS = r[0]
-                # out_str = (
-                    # f"⚡️ **Auto Reply** ⒶⒻⓀ \n ╰•  **Last Check:** {afk_time} ago\n\n"
-                    # f"▫️ **I'm not here because:**\n {STATUS}"
-                # )
-                # await client.send_animation(
-                    # chat_id,
-                    # animation=match.group(0),
-                    # caption=_afk_.out_str(),
-                    # reply_markup=_afk_.afk_buttons(),
-                # )
-            # elif type_ == "url_image":
-                # await client.send_photo(
-                    # chat_id,
-                    # photo=match.group(0),
-                    # caption=_afk_.out_str(),
-                    # reply_markup=_afk_.afk_buttons(),
-                # )
         else:
-            # out_str = (
-                # f"⚡️ **Auto Reply** ⒶⒻⓀ \n ╰•  **Last Check:** {afk_time} ago\n\n"
-                # f"▫️ **I'm not here because:**\n {REASON}"
-            # )
             coro_list.append(
                 await _send_inline_afk(message)
             )
