@@ -122,24 +122,18 @@ async def handle_afk_incomming(message: Message) -> None:
                         # f"⚡️ **Auto Reply** ⒶⒻⓀ \n ╰•  **Last Check:** {afk_time} ago\n\n"
                         # f"▫️ **I'm not here because:**\n {STATUS}"
                     # )
-                    reply = message.reply_to_message
-                    reply_id = reply.message_id if reply else None
                     await client.send_animation(
                         chat_id=message.chat.id,
                         animation=match.group(0),
                         caption=_afk_.out_str(),
                         reply_markup=_afk_.afk_buttons(),
-                        reply_to_message_id=reply_id,
                     )
                 elif type_ == "url_image":
-                    reply = message.reply_to_message
-                    reply_id = reply.message_id if reply else None
                     await client.send_photo(
                         chat_id=message.chat.id,
                         photo=match.group(0),
                         caption=_afk_.out_str(),
                         reply_markup=_afk_.afk_buttons(),
-                        reply_to_message_id=reply_id,
                     )
             else:
                 # out_str = (
@@ -164,24 +158,18 @@ async def handle_afk_incomming(message: Message) -> None:
                     # f"⚡️ **Auto Reply** ⒶⒻⓀ \n ╰•  **Last Check:** {afk_time} ago\n\n"
                     # f"▫️ **I'm not here because:**\n {STATUS}"
                 # )
-                reply = message.reply_to_message
-                reply_id = reply.message_id if reply else None
                 await client.send_animation(
                     chat_id=message.chat.id,
                     animation=match.group(0),
                     caption=_afk_.out_str(),
                     reply_markup=_afk_.afk_buttons(),
-                    reply_to_message_id=reply_id,
                 )
             elif type_ == "url_image":
-                reply = message.reply_to_message
-                reply_id = reply.message_id if reply else None
                 await client.send_photo(
                     chat_id=message.chat.id,
                     photo=match.group(0),
                     caption=_afk_.out_str(),
                     reply_markup=_afk_.afk_buttons(),
-                    reply_to_message_id=reply_id,
                 )
         else:
             # out_str = (
