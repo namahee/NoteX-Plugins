@@ -109,7 +109,7 @@ async def handle_afk_incomming(message: Message) -> None:
     coro_list = []
 
     client = message.client
-    chat_id = 
+    chat_id = message.chat.id
     if user_id in USERS:
         if not (USERS[user_id][0] + USERS[user_id][1]) % randint(2, 4):
             match = _TELE_REGEX.search(REASON)
