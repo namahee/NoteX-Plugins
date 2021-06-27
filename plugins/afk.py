@@ -103,7 +103,7 @@ async def active_afk(message: Message) -> None:
 
 async def afk_inline(message: Message):
     bot = await userge.bot.get_me()
-    x = await userge.get_inline_bot_results(bot.username, "afk")
+    x = await userge.get_inline_bot_results(bot.username, "t")
     await userge.send_inline_bot_result(
         chat_id=message.chat.id, query_id=x.query_id, result_id=x.results[0].id
     )
@@ -191,8 +191,9 @@ async def handle_afk_incomming(message: Message) -> None:
         if match:
             await send_inline_afk(message)
             
-            # type_, media_ = await _afk_.check_media_link(match.group(0))
-            # if type_ == "url_gif":
+            type_, media_ = await _afk_.check_media_link(match.group(0))
+            if type_ == "url_gif":
+                await send_inline_afk(message)
                 # r = REASON.split(" | ", maxsplit=1)
                 # STATUS = r[0]
                 # out_str = (
