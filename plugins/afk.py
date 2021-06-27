@@ -305,7 +305,7 @@ class _afk_:
                 InlineKeyboardButton("My Git", url="https://github.com/samuca78"),
             ],
         ]
-        return buttons
+        return InlineKeyboardMarkup(buttons)
 
 
 @userge.on_filters(IS_AFK_FILTER & filters.outgoing, group=-1, allow_via_bot=False)
