@@ -5,10 +5,12 @@ import time
 from random import randint
 from re import compile as comp_regex
 
-from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
+from pyrogram.errors import BadRequest, FloodWait, Forbidden, MediaEmpty
 
 from userge import Config, Message, filters, get_collection, userge
 from userge.utils import time_formatter
+
+from afk_inline import send_inline_afk, send_inline_afk_, _send_inline_afk
 
 _TELE_REGEX = comp_regex(
     r"http[s]?://(i\.imgur\.com|telegra\.ph/file|t\.me)/(\w+)(?:\.|/)(gif|mp4|jpg|png|jpeg|[0-9]+)(?:/([0-9]+))?"
@@ -115,34 +117,17 @@ async def handle_afk_incomming(message: Message) -> None:
             match = _TELE_REGEX.search(REASON)
             if match:
                 type_, media_ = await _afk_.check_media_link(match.group(0))
-                if type_ == "url_gif":
-                    # r = REASON.split(" | ", maxsplit=1)
-                    # STATUS = r[0]
-                    # out_str = (
-                        # f"⚡️ **Auto Reply** ⒶⒻⓀ \n ╰•  **Last Check:** {afk_time} ago\n\n"
-                        # f"▫️ **I'm not here because:**\n {STATUS}"
-                    # )
-                    await client.send_animation(
-                        chat_id,
-                        animation=match.group(0),
-                        caption=_afk_.out_str(),
-                        reply_markup=_afk_.afk_buttons(),
-                    )
-                elif type_ == "url_image":
-                    await client.send_photo(
-                        chat_id,
-                        photo=match.group(0),
-                        caption=_afk_.out_str(),
-                        reply_markup=_afk_.afk_buttons(),
-                    )
+                if type_ == "url_image":
+                    await send_inline_afk_(message)
+                elif type_ == "url_gif":
+                    await send_inline_afk(message)
             else:
-                # out_str = (
-                    # f"⚡️ **Auto Reply** ⒶⒻⓀ \n ╰•  **Last Check:** {afk_time} ago\n\n"
-                    # f"▫️ **I'm not here because:**\n {REASON}"
-                # )
                 coro_list.append(
-                    message.reply(_afk_._out_str())
+                    await _send_inline_afk(message)
                 )
+                # coro_list.append(
+                    # message.reply(_afk_._out_str())
+                # )
         if chat.type == "private":
             USERS[user_id][0] += 1
         else:
@@ -151,34 +136,17 @@ async def handle_afk_incomming(message: Message) -> None:
         match = _TELE_REGEX.search(REASON)
         if match:
             type_, media_ = await _afk_.check_media_link(match.group(0))
-            if type_ == "url_gif":
-                # r = REASON.split(" | ", maxsplit=1)
-                # STATUS = r[0]
-                # out_str = (
-                    # f"⚡️ **Auto Reply** ⒶⒻⓀ \n ╰•  **Last Check:** {afk_time} ago\n\n"
-                    # f"▫️ **I'm not here because:**\n {STATUS}"
-                # )
-                await client.send_animation(
-                    chat_id,
-                    animation=match.group(0),
-                    caption=_afk_.out_str(),
-                    reply_markup=_afk_.afk_buttons(),
-                )
-            elif type_ == "url_image":
-                await client.send_photo(
-                    chat_id,
-                    photo=match.group(0),
-                    caption=_afk_.out_str(),
-                    reply_markup=_afk_.afk_buttons(),
-                )
+            if type_ == "url_image":
+                await send_inline_afk_(message)
+            elif type_ == "url_gif":
+                await send_inline_afk(message)
         else:
-            # out_str = (
-                # f"⚡️ **Auto Reply** ⒶⒻⓀ \n ╰•  **Last Check:** {afk_time} ago\n\n"
-                # f"▫️ **I'm not here because:**\n {REASON}"
-            # )
             coro_list.append(
-                message.reply(_afk_._out_str())
+                await _send_inline_afk(message)
             )
+            # coro_list.append(
+                # message.reply(_afk_._out_str())
+            # )
         if chat.type == "private":
             USERS[user_id] = [1, 0, user_dict["mention"]]
         else:
@@ -233,6 +201,12 @@ class _afk_:
         )
         return out_str
     
+    def link() -> str:
+        _match_ =  _TELE_REGEX.search(REASON)
+        if _match_:
+            link = _match_.group(0)
+            return link
+    
     async def check_media_link(media_link: str):
         match_ = _TELE_REGEX.search(media_link.strip())
         if not match_:
@@ -257,14 +231,11 @@ class _afk_:
     def afk_buttons() -> InlineKeyboardMarkup:
         buttons = [
             [
-                InlineKeyboardButton(
-                    "REPO", url=Config.UPSTREAM_REPO
-                ),
+                InlineKeyboardButton("My Repo", url="https://github.com/samuca78/NoteX"),
+                InlineKeyboardButton("Github", url="https://github.com"),
             ],
             [
-                InlineKeyboardButton(
-                    "CONTACT", url="https://t.me/NoteZV"
-                ),
+                InlineKeyboardButton("My Git", url="https://github.com/samuca78"),
             ],
         ]
         return InlineKeyboardMarkup(buttons)
