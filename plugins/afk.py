@@ -273,7 +273,7 @@ class _afk_:
         _STATUS = _r[0]
         out_str = (
             f"⚡️ **Auto Reply** ⒶⒻⓀ \n ╰•  **Last Check:** {_afk_time} ago\n\n"
-            f"▫️ **I'm not here because:**\n {_STATUS}\n\n{match.group(3})"
+            f"▫️ **I'm not here because:**\n {_STATUS}\n\n{match.group(3)}"
         )
         return out_str
         
