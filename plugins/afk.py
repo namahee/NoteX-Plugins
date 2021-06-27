@@ -123,14 +123,14 @@ async def handle_afk_incomming(message: Message) -> None:
                         # f"▫️ **I'm not here because:**\n {STATUS}"
                     # )
                     await client.send_animation(
-                        chat_id=,
+                        chat_id,
                         animation=match.group(0),
                         caption=_afk_.out_str(),
                         reply_markup=_afk_.afk_buttons(),
                     )
                 elif type_ == "url_image":
                     await client.send_photo(
-                        chat_id=,
+                        chat_id,
                         photo=match.group(0),
                         caption=_afk_.out_str(),
                         reply_markup=_afk_.afk_buttons(),
@@ -166,7 +166,7 @@ async def handle_afk_incomming(message: Message) -> None:
                 )
             elif type_ == "url_image":
                 await client.send_photo(
-                    chat_id=,
+                    chat_id,
                     photo=match.group(0),
                     caption=_afk_.out_str(),
                     reply_markup=_afk_.afk_buttons(),
