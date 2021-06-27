@@ -12,7 +12,7 @@ from userge.utils import time_formatter
 
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton, CallbackQuery
 
-from afk_inline import send_inline_afk, send_inline_afk_, _send_inline_afk
+# from afk_inline import send_inline_afk, send_inline_afk_, _send_inline_afk
 
 _TELE_REGEX = comp_regex(
     r"http[s]?://(i\.imgur\.com|telegra\.ph/file|t\.me)/(\w+)(?:\.|/)(gif|mp4|jpg|png|jpeg|[0-9]+)(?:/([0-9]+))?"
@@ -241,6 +241,27 @@ class _afk_:
             ],
         ]
         return InlineKeyboardMarkup(buttons)
+        
+    async def send_inline_afk(message: Message):
+        bot = await userge.bot.get_me()
+        x = await userge.get_inline_bot_results(bot.username, "afk")
+        await userge.send_inline_bot_result(
+            chat_id=message.chat.id, query_id=x.query_id, result_id=x.results[0].id
+        )
+        
+    async def send_inline_afk_(message: Message):
+        bot_ = await userge.bot.get_me()
+        x_ = await userge.get_inline_bot_results(bot_.username, "afk_")
+        await userge.send_inline_bot_result(
+            chat_id=message.chat.id, query_id=x_.query_id, result_id=x_.results[0].id
+        )
+        
+    async def _send_inline_afk(message: Message):
+        _bot = await userge.bot.get_me()
+        _x = await userge.get_inline_bot_results(_bot.username, "_afk")
+        await userge.send_inline_bot_result(
+            chat_id=message.chat.id, query_id=_x.query_id, result_id=_x.results[0].id
+        )
 
 
 @userge.on_filters(IS_AFK_FILTER & filters.outgoing, group=-1, allow_via_bot=False)
