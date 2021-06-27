@@ -193,11 +193,11 @@ async def handle_afk_incomming(message: Message) -> None:
         match = _TELE_REGEX.search(REASON)
         if match:
             type_, media_ = await _afk_.check_media_link(match.group(0))
-            if not match.group(3) == "url_gif":
-                if match.group(3) == "url_image":
+            if not match.group(3) == "gif":
+                if match.group(3) == "jpg":
                     await send_inline_afk_(message)
             else:
-                if match.group(3) == "url_gif":
+                if match.group(3) == "gif":
                     coro_list.append(
                         await send_inline_afk(message)
                     )
