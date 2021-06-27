@@ -106,7 +106,6 @@ async def send_inline_afk(message: Message):
     await userge.send_inline_bot_result(
         chat_id=message.chat.id, query_id=x.query_id, result_id=x.results[0].id
     )
-    await message.delete()
     
 async def send_inline_afk_(message: Message):
     bot = await userge.bot.get_me()
@@ -114,7 +113,6 @@ async def send_inline_afk_(message: Message):
     await userge.send_inline_bot_result(
         chat_id=message.chat.id, query_id=x.query_id, result_id=x.results[0].id
     )
-    await message.delete()
     
 async def _send_inline_afk(message: Message):
     bot = await userge.bot.get_me()
@@ -122,7 +120,6 @@ async def _send_inline_afk(message: Message):
     await userge.send_inline_bot_result(
         chat_id=message.chat.id, query_id=x.query_id, result_id=x.results[0].id
     )
-    await message.delete()
     
 # async def send_inline_afk(message: Message) -> None:
     # _bot = await userge.bot.get_me()
