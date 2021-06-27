@@ -108,41 +108,19 @@ async def send_inline_afk(message: Message):
     )
     
 async def send_inline_afk_(message: Message):
-    bot = await userge.bot.get_me()
-    x = await userge.get_inline_bot_results(bot.username, "afk_")
+    bot_ = await userge.bot.get_me()
+    x_ = await userge.get_inline_bot_results(bot_.username, "afk_")
     await userge.send_inline_bot_result(
-        chat_id=message.chat.id, query_id=x.query_id, result_id=x.results[0].id
+        chat_id=message.chat.id, query_id=x_.query_id, result_id=x_.results[0].id
     )
     
 async def _send_inline_afk(message: Message):
-    bot = await userge.bot.get_me()
-    x = await userge.get_inline_bot_results(bot.username, "_afk")
+    _bot = await userge.bot.get_me()
+    _x = await userge.get_inline_bot_results(_bot.username, "_afk")
     await userge.send_inline_bot_result(
-        chat_id=message.chat.id, query_id=x.query_id, result_id=x.results[0].id
+        chat_id=message.chat.id, query_id=_x.query_id, result_id=_x.results[0].id
     )
     
-# async def send_inline_afk(message: Message) -> None:
-    # _bot = await userge.bot.get_me()
-    # try:
-        # i_res = await userge.get_inline_bot_results(_bot.username, "afk")
-        # i_res_id = (
-            # (
-                # await userge.send_inline_bot_result(
-                    # chat_id=message.chat.id,
-                    # query_id=i_res.query_id,
-                    # result_id=i_res.results[0].id,
-                # )
-            # )
-            # .updates[0]
-            # .id
-        # )
-    # except (Forbidden, BadRequest) as ex:
-        # await message.err(str(ex), del_in=5)
-        # return
-    # await message.delete()
-    # await asyncio.sleep(60)
-    # await userge.delete_messages(message.chat.id, i_res_id)
-
 
 async def handle_afk_incomming(message: Message) -> None:
     """handle incomming messages when you afk"""
