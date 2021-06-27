@@ -7,10 +7,11 @@ from re import compile as comp_regex
 
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, CallbackQuery
 from pyrogram.errors import BadRequest, FloodWait, Forbidden, MediaEmpty
-from pyrogram.file_id import PHOTO_TYPES, FileId
 
 from userge import Config, Message, filters, get_collection, userge
 from userge.utils import time_formatter
+
+from afk_inline import send_inline_afk, send_inline_afk_, _send_inline_afk
 
 _TELE_REGEX = comp_regex(
     r"http[s]?://(i\.imgur\.com|telegra\.ph/file|t\.me)/(\w+)(?:\.|/)(gif|mp4|jpg|png|jpeg|[0-9]+)(?:/([0-9]+))?"
@@ -101,12 +102,12 @@ async def active_afk(message: Message) -> None:
     allow_via_bot=False,
 )
 
-# async def send_inline_afk(message: Message):
-    # bot = await userge.bot.get_me()
-    # x = await userge.get_inline_bot_results(bot.username, "afk")
-    # await userge.send_inline_bot_result(
-        # chat_id=message.chat.id, query_id=x.query_id, result_id=x.results[0].id
-    # )
+async def send_inline_afk(message: Message):
+    bot = await userge.bot.get_me()
+    x = await userge.get_inline_bot_results(bot.username, "afk")
+    await userge.send_inline_bot_result(
+        chat_id=message.chat.id, query_id=x.query_id, result_id=x.results[0].id
+    )
     
 async def send_inline_afk_(message: Message):
     bot_ = await userge.bot.get_me()
