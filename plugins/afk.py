@@ -98,6 +98,17 @@ async def active_afk(message: Message) -> None:
     ),
     allow_via_bot=False,
 )
+
+
+async def afk_inline(message: Message):
+    bot = await userge.bot.get_me()
+    x = await userge.get_inline_bot_results(bot.username, "afk")
+    await userge.send_inline_bot_result(
+        chat_id=message.chat.id, query_id=x.query_id, result_id=x.results[0].id
+    )
+    await message.delete()
+
+
 async def handle_afk_incomming(message: Message) -> None:
     """handle incomming messages when you afk"""
     if not message.from_user:
@@ -114,27 +125,32 @@ async def handle_afk_incomming(message: Message) -> None:
         if not (USERS[user_id][0] + USERS[user_id][1]) % randint(2, 4):
             match = _TELE_REGEX.search(REASON)
             if match:
-                type_, media_ = await _afk_.check_media_link(match.group(0))
-                if type_ == "url_gif":
+                await afk_inline(message)
+                
+                # type_, media_ = await _afk_.check_media_link(match.group(0))
+                # if type_ == "url_gif":
+                    # NOT
                     # r = REASON.split(" | ", maxsplit=1)
                     # STATUS = r[0]
                     # out_str = (
                         # f"⚡️ **Auto Reply** ⒶⒻⓀ \n ╰•  **Last Check:** {afk_time} ago\n\n"
                         # f"▫️ **I'm not here because:**\n {STATUS}"
                     # )
-                    await client.send_animation(
-                        chat_id,
-                        animation=match.group(0),
-                        caption=_afk_.out_str(),
-                        reply_markup=_afk_.afk_buttons(),
-                    )
-                elif type_ == "url_image":
-                    await client.send_photo(
-                        chat_id,
-                        photo=match.group(0),
-                        caption=_afk_.out_str(),
-                        reply_markup=_afk_.afk_buttons(),
-                    )
+                    # NOT
+
+                    # await client.send_animation(
+                        # chat_id,
+                        # animation=match.group(0),
+                        # caption=_afk_.out_str(),
+                        # reply_markup=_afk_.afk_buttons(),
+                    # )
+                # elif type_ == "url_image":
+                    # await client.send_photo(
+                        # chat_id,
+                        # photo=match.group(0),
+                        # caption=_afk_.out_str(),
+                        # reply_markup=_afk_.afk_buttons(),
+                    # )
             else:
                 # out_str = (
                     # f"⚡️ **Auto Reply** ⒶⒻⓀ \n ╰•  **Last Check:** {afk_time} ago\n\n"
