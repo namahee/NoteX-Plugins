@@ -7,6 +7,7 @@ from re import compile as comp_regex
 
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, CallbackQuery
 from pyrogram.errors import BadRequest, FloodWait, Forbidden, MediaEmpty
+from pyrogram.file_id import PHOTO_TYPES, FileId
 
 from userge import Config, Message, filters, get_collection, userge
 from userge.utils import time_formatter
