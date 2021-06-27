@@ -109,7 +109,7 @@ async def handle_afk_incomming(message: Message) -> None:
     coro_list = []
 
     client = message.client
-    chat_id = message.chat.id
+    chat_id = 
     if user_id in USERS:
         if not (USERS[user_id][0] + USERS[user_id][1]) % randint(2, 4):
             match = _TELE_REGEX.search(REASON)
@@ -123,14 +123,14 @@ async def handle_afk_incomming(message: Message) -> None:
                         # f"▫️ **I'm not here because:**\n {STATUS}"
                     # )
                     await client.send_animation(
-                        chat_id=message.chat.id,
+                        chat_id=,
                         animation=match.group(0),
                         caption=_afk_.out_str(),
                         reply_markup=_afk_.afk_buttons(),
                     )
                 elif type_ == "url_image":
                     await client.send_photo(
-                        chat_id=message.chat.id,
+                        chat_id=,
                         photo=match.group(0),
                         caption=_afk_.out_str(),
                         reply_markup=_afk_.afk_buttons(),
@@ -159,14 +159,14 @@ async def handle_afk_incomming(message: Message) -> None:
                     # f"▫️ **I'm not here because:**\n {STATUS}"
                 # )
                 await client.send_animation(
-                    chat_id=message.chat.id,
+                    chat_id,
                     animation=match.group(0),
                     caption=_afk_.out_str(),
                     reply_markup=_afk_.afk_buttons(),
                 )
             elif type_ == "url_image":
                 await client.send_photo(
-                    chat_id=message.chat.id,
+                    chat_id=,
                     photo=match.group(0),
                     caption=_afk_.out_str(),
                     reply_markup=_afk_.afk_buttons(),
