@@ -118,7 +118,7 @@ async def send_inline_afk_(message: Message):
     
 async def _send_inline_afk(message: Message):
     bot = await userge.bot.get_me()
-    x = await userge.get_inline_bot_results(bot.username, "gesso")
+    x = await userge.get_inline_bot_results(bot.username, "_afk")
     await userge.send_inline_bot_result(
         chat_id=message.chat.id, query_id=x.query_id, result_id=x.results[0].id
     )
