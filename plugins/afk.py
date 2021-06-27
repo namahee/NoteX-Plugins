@@ -166,27 +166,29 @@ async def handle_afk_incomming(message: Message) -> None:
     else:
         match = _TELE_REGEX.search(REASON)
         if match:
-            type_, media_ = await _afk_.check_media_link(match.group(0))
-            if type_ == "url_gif":
+            await afk_inline(message)
+            
+            # type_, media_ = await _afk_.check_media_link(match.group(0))
+            # if type_ == "url_gif":
                 # r = REASON.split(" | ", maxsplit=1)
                 # STATUS = r[0]
                 # out_str = (
                     # f"⚡️ **Auto Reply** ⒶⒻⓀ \n ╰•  **Last Check:** {afk_time} ago\n\n"
                     # f"▫️ **I'm not here because:**\n {STATUS}"
                 # )
-                await client.send_animation(
-                    chat_id,
-                    animation=match.group(0),
-                    caption=_afk_.out_str(),
-                    reply_markup=_afk_.afk_buttons(),
-                )
-            elif type_ == "url_image":
-                await client.send_photo(
-                    chat_id,
-                    photo=match.group(0),
-                    caption=_afk_.out_str(),
-                    reply_markup=_afk_.afk_buttons(),
-                )
+                # await client.send_animation(
+                    # chat_id,
+                    # animation=match.group(0),
+                    # caption=_afk_.out_str(),
+                    # reply_markup=_afk_.afk_buttons(),
+                # )
+            # elif type_ == "url_image":
+                # await client.send_photo(
+                    # chat_id,
+                    # photo=match.group(0),
+                    # caption=_afk_.out_str(),
+                    # reply_markup=_afk_.afk_buttons(),
+                # )
         else:
             # out_str = (
                 # f"⚡️ **Auto Reply** ⒶⒻⓀ \n ╰•  **Last Check:** {afk_time} ago\n\n"
@@ -273,17 +275,14 @@ class _afk_:
     def afk_buttons() -> InlineKeyboardMarkup:
         buttons = [
             [
-                InlineKeyboardButton(
-                    "REPO", url=Config.UPSTREAM_REPO
-                ),
+                InlineKeyboardButton("My Repo", url="https://github.com/samuca78/NoteX"),
+                InlineKeyboardButton("Github", url="https://github.com"),
             ],
             [
-                InlineKeyboardButton(
-                    "CONTACT", url="https://t.me/NoteZV"
-                ),
+                InlineKeyboardButton("My Git", url="https://github.com/samuca78"),
             ],
         ]
-        return InlineKeyboardMarkup(buttons)
+        return buttons
 
 
 @userge.on_filters(IS_AFK_FILTER & filters.outgoing, group=-1, allow_via_bot=False)
