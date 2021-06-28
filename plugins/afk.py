@@ -230,8 +230,6 @@ class _afk_:
     # def afk_buttons() -> InlineKeyboardMarkup:
         # buttons = [
             # [
-                # InlineKeyboardButton("", url="https://github.com/samuca78/NoteX"),
-                # InlineKeyboardButton("CONTACT ME", url="https://t.me/NoteZV"),
                 # InlineKeyboardButton(text="▫️Bio", url="https://t.me/notezvbio"),
             # ]
         # ]
