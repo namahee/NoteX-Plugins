@@ -139,7 +139,6 @@ async def handle_afk_incomming(message: Message) -> None:
     else:
         match = _TELE_REGEX.search(REASON)
         if match:
-            # await _send_inline_afk_(message)
             type_, media_ = await _afk_.check_media_link(match.group(0))
             if type_ == "url_image":
                 await send_inline_afk_(message)
@@ -187,30 +186,30 @@ async def handle_afk_incomming(message: Message) -> None:
     await asyncio.gather(*coro_list)
 
 
-# class _afk_:
-    # def out_str() -> str:
-        # _afk_time = time_formatter(round(time.time() - TIME))
-        # _r = REASON.split(" | ", maxsplit=1)
-        # _STATUS = _r[0]
-        # out_str = (
-            # f"⚡️ **Auto Reply** ⒶⒻⓀ \n ╰•  **Last Check:** {_afk_time} ago\n\n"
-            # f"▫️ **I'm not here because:**\n {_STATUS}"
-        # )
-        # return out_str
+class _afk_:
+    def out_str() -> str:
+        _afk_time = time_formatter(round(time.time() - TIME))
+        _r = REASON.split(" | ", maxsplit=1)
+        _STATUS = _r[0]
+        out_str = (
+            f"⚡️ **Auto Reply** ⒶⒻⓀ \n ╰•  **Last Check:** {_afk_time} ago\n\n"
+            f"▫️ **I'm not here because:**\n {_STATUS}"
+        )
+        return out_str
         
-    # def _out_str() -> str:
-        # afk_time_ = time_formatter(round(time.time() - TIME))
-        # out_str = (
-            # f"⚡️ **Auto Reply** ⒶⒻⓀ \n ╰•  **Last Check:** {afk_time_} ago.\n\n"
-            # f"▫️ **I'm not here because:**\n {REASON}"
-       #  )
-        # return out_str
+    def _out_str() -> str:
+        afk_time_ = time_formatter(round(time.time() - TIME))
+        out_str = (
+            f"⚡️ **Auto Reply** ⒶⒻⓀ \n ╰•  **Last Check:** {afk_time_} ago.\n\n"
+            f"▫️ **I'm not here because:**\n {REASON}"
+        )
+        return out_str
     
-    # def link() -> str:
-        # _match_ =  _TELE_REGEX.search(REASON)
-        # if _match_:
-            # link = _match_.group(0)
-            # return link
+    def link() -> str:
+        _match_ =  _TELE_REGEX.search(REASON)
+        if _match_:
+            link = _match_.group(0)
+            return link
     
     # async def check_media_link(media_link: str):
         # match_ = _TELE_REGEX.search(media_link.strip())
