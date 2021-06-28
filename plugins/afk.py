@@ -288,23 +288,24 @@ async def handle_afk_outgoing(message: Message) -> None:
 
 # teste #
 @userge.bot.on_callback_query(filters.regex(pattern=r"^status_afk$"))
-    async def status_afk_(_, c_q: CallbackQuery):
-        _afk_time_ = time_formatter(round(time.time() - TIME))
-        if c_q.from_user and (
-           c_q.from_user.id in Config.OWNER_ID
-               ):
-#               try:
-#               await c_q.edit_message_text(
-#                   reply_markup=_afk_.afk_buttons(),
-#                   disable_web_page_preview=True,
-#               )      
-                await c_q.answer(
-                    f"Last Check: {_afk_time_}\nDev: @NoteZV ",
-                    show_alert=True,
-                )
-
-        return status_afk_
+async def status_afk_(_, c_q: CallbackQuery):
+    _afk_time_ = time_formatter(round(time.time() - TIME))
+    if c_q.from_user and (
+        c_q.from_user.id in Config.OWNER_ID
+            ):
+            # try:
+            # await c_q.edit_message_text(
+                # reply_markup=_afk_.afk_buttons(),
+                # disable_page_web_view=True,
+            # )
+            await c_q.answer(
+                f"Last Check: {_afk_time_}\nDev: @NoteZV",
+                show_alert=True,
+            )
+    return status_afk_
         
+        
+    
 AFK_REASONS = (
     "I'm busy right now. Please talk in a bag and when I come back you can just give me the bag!",
     "I'm away right now. If you need anything, leave a message after the beep: \
