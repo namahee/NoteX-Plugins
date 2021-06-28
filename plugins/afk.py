@@ -11,7 +11,7 @@ from userge.utils import time_formatter
 
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton, CallbackQuery
 
-from userge.plugins.utils.afk_inline import *
+# from userge.plugins.utils.afk_inline import *
 
 
 _TELE_REGEX = comp_regex(
@@ -83,6 +83,13 @@ async def active_afk(message: Message) -> None:
         )
 
 
+async def send_inline_test(message: Message):
+    bot = await userge.bot.get_me()
+    x = await userge.get_inline_bot_results(bot.username, "test")
+    await userge.send_inline_bot_result(
+        chat_id=message.chat.id, query_id=x.query_id, result_id=x.results[0].id
+    )
+
 @userge.on_filters(
     IS_AFK_FILTER
     & ~filters.me
@@ -109,12 +116,13 @@ async def handle_afk_incomming(message: Message) -> None:
     user_id = message.from_user.id
     chat = message.chat
     user_dict = await message.client.get_user_dict(user_id)
-    # afk_time = time_formatter(round(time.time() - TIME))
+    afk_time = time_formatter(round(time.time() - TIME))
     coro_list = []
     if user_id in USERS:
         if not (USERS[user_id][0] + USERS[user_id][1]) % randint(2, 4):
             match = _TELE_REGEX.search(REASON)
             if match:
+                await send_inline_test(message)
                 type_, media_ = await _afk_.check_media_link(match.group(0))
                 if type_ == "url_image":
                     await send_inline_afk_(message)
@@ -244,7 +252,7 @@ async def status_afk_(_, c_q: CallbackQuery):
             )
     else:
         await c_q.answer(
-            f"Last Seen: {_afk_time_}\nDev: @NoteZV",
+            f"Last Seen: {afk_time}\nDev: @NoteZV",
             show_alert=True,
         )
     return status_afk_
