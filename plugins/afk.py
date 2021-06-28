@@ -15,7 +15,9 @@ from userge.plugins.utils.afk_inline import (
     send_inline_afk,
     send_inline_afk_,
     _send_inline_afk,
+    _afk_,
 )
+
 
 _TELE_REGEX = comp_regex(
     r"http[s]?://(i\.imgur\.com|telegra\.ph/file|t\.me)/(\w+)(?:\.|/)(gif|mp4|jpg|png|jpeg|[0-9]+)(?:/([0-9]+))?"
