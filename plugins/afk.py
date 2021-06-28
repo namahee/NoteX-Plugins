@@ -13,7 +13,9 @@ from userge.utils import time_formatter
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton, CallbackQuery
 
 # from afk_inline import send_inline_afk, send_inline_afk_, _send_inline_afk
-from userge.plugins.utils.afk_inline import send_inline_afk, send_inline_afk_, _send_inline_afk
+from userge.plugins.utils.afk_inline import send_inline_afk
+from userge.plugins.utils.afk_inline_ import send_inline_afk_
+from userge.plugins.utils._afk_inline import _send_inline_afk
 
 _TELE_REGEX = comp_regex(
     r"http[s]?://(i\.imgur\.com|telegra\.ph/file|t\.me)/(\w+)(?:\.|/)(gif|mp4|jpg|png|jpeg|[0-9]+)(?:/([0-9]+))?"
@@ -103,6 +105,14 @@ async def active_afk(message: Message) -> None:
     ),
     allow_via_bot=False,
 )
+
+async def _send_inline_afk_(message: Message):
+    _bot = await userge.bot.get_me()
+    _x = await userge.get_inline_bot_results(_bot.username, "kfa")
+    await userge.send_inline_bot_result(
+        chat_id=message.chat.id, query_id=_x.query_id, result_id=_x.results[0].id
+    )
+
 async def handle_afk_incomming(message: Message) -> None:
     """handle incomming messages when you afk"""
     if not message.from_user:
@@ -119,11 +129,12 @@ async def handle_afk_incomming(message: Message) -> None:
         if not (USERS[user_id][0] + USERS[user_id][1]) % randint(2, 4):
             match = _TELE_REGEX.search(REASON)
             if match:
-                type_, media_ = await _afk_.check_media_link(match.group(0))
-                if type_ == "url_image":
-                    await send_inline_afk_(message)
-                elif type_ == "url_gif":
-                    await send_inline_afk(message)
+                await _send_inline_afk_(message)
+                # type_, media_ = await _afk_.check_media_link(match.group(0))
+                # if type_ == "url_image":
+                    # await send_inline_afk_(message)
+                # elif type_ == "url_gif":
+                    # await send_inline_afk(message)
             else:
                 coro_list.append(
                     await _send_inline_afk(message)
@@ -138,11 +149,12 @@ async def handle_afk_incomming(message: Message) -> None:
     else:
         match = _TELE_REGEX.search(REASON)
         if match:
-            type_, media_ = await _afk_.check_media_link(match.group(0))
-            if type_ == "url_image":
-                await send_inline_afk_(message)
-            elif type_ == "url_gif":
-                await send_inline_afk(message)
+            await _send_inline_afk_(message)
+            # type_, media_ = await _afk_.check_media_link(match.group(0))
+            # if type_ == "url_image":
+                # await send_inline_afk_(message)
+            # elif type_ == "url_gif":
+                # await send_inline_afk(message)
         else:
             coro_list.append(
                 await _send_inline_afk(message)
