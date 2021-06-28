@@ -40,7 +40,7 @@ async def _init() -> None:
 
 
 @userge.on_cmd(
-    "afk",
+    "af",
     about={
         "header": "Set to AFK mode",
         "description": "Sets your status as AFK. Responds to anyone who tags/PM's.\n"
