@@ -14,7 +14,7 @@ from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton, CallbackQ
 
 # from afk_inline import send_inline_afk, send_inline_afk_, _send_inline_afk
 from userge.plugins.utils.afk_inline_ import send_inline_afk_
-from userge.plugins.utils.afk_inline import send_inline_afk
+# from userge.plugins.utils.afk_inline import send_inline_afk
 from userge.plugins.utils._afk_inline import _send_inline_afk
 
 _TELE_REGEX = comp_regex(
@@ -106,12 +106,12 @@ async def active_afk(message: Message) -> None:
     allow_via_bot=False,
 )
 
-# async def _send_inline_afk_(message: Message):
-    # _bot = await userge.bot.get_me()
-    # _x = await userge.get_inline_bot_results(_bot.username, "cafe")
-    # await userge.send_inline_bot_result(
-        # chat_id=message.chat.id, query_id=_x.query_id, result_id=_x.results[0].id
-    # )
+async def _send_inline_afk_(message: Message):
+    _bot = await userge.bot.get_me()
+     _x = await userge.get_inline_bot_results(_bot.username, "cafe")
+    await userge.send_inline_bot_result(
+        chat_id=message.chat.id, query_id=_x.query_id, result_id=_x.results[0].id
+    )
 
 async def handle_afk_incomming(message: Message) -> None:
     """handle incomming messages when you afk"""
@@ -134,7 +134,8 @@ async def handle_afk_incomming(message: Message) -> None:
                 if type_ == "url_image":
                     await send_inline_afk_(message)
                 elif type_ == "url_gif":
-                    await send_inline_afk(message)
+                    await _send_inline_afk_(message)
+                    # await send_inline_afk(message)
             else:
                 coro_list.append(
                     await _send_inline_afk(message)
