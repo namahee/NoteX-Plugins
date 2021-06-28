@@ -232,7 +232,7 @@ class _afk_:
             [
                 # InlineKeyboardButton("", url="https://github.com/samuca78/NoteX"),
                 # InlineKeyboardButton("CONTACT ME", url="https://t.me/NoteZV"),
-                InlineKeyboardButton(text="BIO", url="https://t.me/notezvbio"
+                InlineKeyboardButton(text="BIO", url="https://t.me/notezvbio"),
             ]
         ]
         return InlineKeyboardMarkup(buttons)
