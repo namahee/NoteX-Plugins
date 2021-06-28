@@ -232,9 +232,9 @@ class _afk_:
             link_type = "url_gif" if match_.group(3) == "gif" else "url_image"
         elif match_.group(1) == "telegra.ph/file":
             link = match_.group(0)
-            if match.group(3) == "gif":
+            if match_.group(3) == "gif":
                 link_type = "url_gif"
-            elif match.group(3) == "jpg":
+            elif match_.group(3) == "jpg":
                 link_type = "url_image"
             # link_type = "url_gif" if match_.group(3) == "gif" else "url_image"
         else:
