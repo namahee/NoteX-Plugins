@@ -133,8 +133,8 @@ async def handle_afk_incomming(message: Message) -> None:
                 type_, media_ = await _afk_.check_media_link(match.group(0))
                 if match.group(3) == "jpg":
                     await send_inline_afk_(message)
-                # elif match.group(3) == "giisf":
-                    #  await _send_inline_afk_(message)
+                elif match.group(3) == "giisf":
+                     await _send_inline_afk(message)
                 # if type_ == "url_image":
                     # await send_inline_afk_(message)
                 # elif type_ == "url_gif":
@@ -236,11 +236,11 @@ class _afk_:
             link_type = "url_gif" if match_.group(3) == "gif" else "url_image"
         elif match_.group(1) == "telegra.ph/file":
             link = match_.group(0)
-            if match_.group(3) == "gif":
-                link_type = "url_gif"
-            elif match_.group(3) == "jpg":
-                link_type = "url_image"
-            # link_type = "url_gif" if match_.group(3) == "gif" else "url_image"
+            # if match_.group(3) == "gif":
+                # link_type = "url_gif"
+            # elif match_.group(3) == "jpg":
+                # link_type = "url_image"
+            link_type = "url_gif" if match_.group(3) == "gif" else "url_image"
         else:
             link_type = "tg_media"
             if match_.group(2) == "c":
