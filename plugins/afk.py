@@ -11,11 +11,7 @@ from userge.utils import time_formatter
 
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton, CallbackQuery
 
-from userge.plugins.utils.afk_inline import (
-    send_inline_afk,
-    send_inline_afk_,
-    _send_inline_afk,
-)
+from userge.plugins.utils.afk_inline import send_inline_afk
 
 
 _TELE_REGEX = comp_regex(
@@ -231,17 +227,17 @@ class _afk_:
             link = [chat_id, int(message_id)]
         return link_type, link
 
-    # def afk_buttons() -> InlineKeyboardMarkup:
-        # buttons = [
-            # [
-                # InlineKeyboardButton("My Repo", url="https://github.com/samuca78/NoteX"),
-                # InlineKeyboardButton("Github", url="https://github.com"),
-            # ],
-            # [
-                # InlineKeyboardButton("My Git", url="https://github.com/samuca78"),
-            # ],
-        # ]
-        # return InlineKeyboardMarkup(buttons)
+    def afk_buttons() -> InlineKeyboardMarkup:
+        buttons = [
+            [
+                InlineKeyboardButton("My Repo", url="https://github.com/samuca78/NoteX"),
+                InlineKeyboardButton("Github", url="https://github.com"),
+            ],
+            [
+                InlineKeyboardButton("My Git", url="https://github.com/samuca78"),
+            ],
+        ]
+        return InlineKeyboardMarkup(buttons)
 
 @userge.on_filters(IS_AFK_FILTER & filters.outgoing, group=-1, allow_via_bot=False)
 async def handle_afk_outgoing(message: Message) -> None:
