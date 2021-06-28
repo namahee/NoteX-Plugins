@@ -302,7 +302,7 @@ async def status_afk_(_, c_q: CallbackQuery):
                     f"Last Check: {_afk_time_}\nDev: @NoteZV ",
                     show_alert=True,
                 )
-    return status_afk_
+return status_afk_
 
 AFK_REASONS = (
     "I'm busy right now. Please talk in a bag and when I come back you can just give me the bag!",
