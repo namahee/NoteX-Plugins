@@ -83,13 +83,6 @@ async def active_afk(message: Message) -> None:
         )
 
 
-async def send_inline_test(message: Message):
-    bot = await userge.bot.get_me()
-    x = await userge.get_inline_bot_results(bot.username, "test")
-    await userge.send_inline_bot_result(
-        chat_id=message.chat.id, query_id=x.query_id, result_id=x.results[0].id
-    )
-
 @userge.on_filters(
     IS_AFK_FILTER
     & ~filters.me
@@ -122,12 +115,11 @@ async def handle_afk_incomming(message: Message) -> None:
         if not (USERS[user_id][0] + USERS[user_id][1]) % randint(2, 4):
             match = _TELE_REGEX.search(REASON)
             if match:
-                await send_inline_test(message)
-                # type_, media_ = await _afk_.check_media_link(match.group(0))
-                # if type_ == "url_image":
-                    # await send_inline_afk_(message)
-                # elif type_ == "url_gif":
-                     # await send_inline_afk(message)
+                type_, media_ = await _afk_.check_media_link(match.group(0))
+                if type_ == "url_image":
+                    await send_inline_afk_(message)
+                elif type_ == "url_gif":
+                     await send_inline_afk(message)
             else:
                 coro_list.append(
                     await _send_inline_afk(message)
@@ -142,12 +134,11 @@ async def handle_afk_incomming(message: Message) -> None:
     else:
         match = _TELE_REGEX.search(REASON)
         if match:
-            await send_inline_test(message)
-            # type_, media_ = await _afk_.check_media_link(match.group(0))
-            # if type_ == "url_image":
-                # await send_inline_afk_(message)
-            # elif type_ == "url_gif":
-                # await send_inline_afk(message)
+            type_, media_ = await _afk_.check_media_link(match.group(0))
+            if type_ == "url_image":
+                await send_inline_afk_(message)
+            elif type_ == "url_gif":
+                await send_inline_afk(message)
         else:
             coro_list.append(
                 await _send_inline_afk(message)
