@@ -149,7 +149,7 @@ async def handle_afk_incomming(message: Message) -> None:
     else:
         match = _TELE_REGEX.search(REASON)
         if match:
-            await _send_inline_afk_(message)
+            # await _send_inline_afk_(message)
             type_, media_ = await _afk_.check_media_link(match.group(0))
             if type_ == "url_image":
                 await send_inline_afk_(message)
