@@ -120,12 +120,12 @@ async def handle_afk_incomming(message: Message) -> None:
             if match:
                 type_, media_ = await _afk_.check_media_link(match.group(0))
                 if type_ == "url_image":
-                    await _afk_.send_inline_afk_(message)
+                    await send_inline_afk_(message)
                 elif type_ == "url_gif":
-                    await _afk_.send_inline_afk(message)
+                    await send_inline_afk(message)
             else:
                 coro_list.append(
-                    await _afk_._send_inline_afk(message)
+                    await _send_inline_afk(message)
                 )
                 # coro_list.append(
                     # message.reply(_afk_._out_str())
@@ -139,12 +139,12 @@ async def handle_afk_incomming(message: Message) -> None:
         if match:
             type_, media_ = await _afk_.check_media_link(match.group(0))
             if type_ == "url_image":
-                await _afk_.send_inline_afk_(message)
+                await send_inline_afk_(message)
             elif type_ == "url_gif":
-                await _afk_.send_inline_afk(message)
+                await send_inline_afk(message)
         else:
             coro_list.append(
-                await _afk_._send_inline_afk(message)
+                await _send_inline_afk(message)
             )
             # coro_list.append(
                 # message.reply(_afk_._out_str())
@@ -241,28 +241,6 @@ class _afk_:
             ],
         ]
         return InlineKeyboardMarkup(buttons)
-        
-    async def send_inline_afk(message: Message):
-        bot = await userge.bot.get_me()
-        x = await userge.get_inline_bot_results(bot.username, "afk")
-        await userge.send_inline_bot_result(
-            chat_id=message.chat.id, query_id=x.query_id, result_id=x.results[0].id
-        )
-        
-    async def send_inline_afk_(message: Message):
-        bot_ = await userge.bot.get_me()
-        x_ = await userge.get_inline_bot_results(bot_.username, "afk_")
-        await userge.send_inline_bot_result(
-            chat_id=message.chat.id, query_id=x_.query_id, result_id=x_.results[0].id
-        )
-        
-    async def _send_inline_afk(message: Message):
-        _bot = await userge.bot.get_me()
-        _x = await userge.get_inline_bot_results(_bot.username, "_afk")
-        await userge.send_inline_bot_result(
-            chat_id=message.chat.id, query_id=_x.query_id, result_id=_x.results[0].id
-        )
-
 
 @userge.on_filters(IS_AFK_FILTER & filters.outgoing, group=-1, allow_via_bot=False)
 async def handle_afk_outgoing(message: Message) -> None:
