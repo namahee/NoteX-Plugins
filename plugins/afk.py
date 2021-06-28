@@ -15,7 +15,6 @@ from userge.plugins.utils.afk_inline import (
     send_inline_afk,
     send_inline_afk_,
     _send_inline_afk,
-    _afk,
 )
 
 
