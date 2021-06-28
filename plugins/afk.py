@@ -11,7 +11,7 @@ from userge.utils import time_formatter
 
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton, CallbackQuery
 
-# from userge.plugins.utils.afk_inline import *
+from userge.plugins.utils.afk_inline import *
 
 
 _TELE_REGEX = comp_regex(
