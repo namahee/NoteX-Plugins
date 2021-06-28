@@ -181,6 +181,75 @@ async def handle_afk_incomming(message: Message) -> None:
     await asyncio.gather(*coro_list)
 
 
+@userge.on_filters(IS_AFK_FILTER & filters.outgoing, group=-1, allow_via_bot=False)
+async def handle_afk_outgoing(message: Message) -> None:
+    """handle outgoing messages when you afk"""
+    global IS_AFK  # pylint: disable=global-statement
+    IS_AFK = False
+    afk_time = time_formatter(round(time.time() - TIME))
+    replied: Message = await message.reply("`I'm no longer AFK!`", log=__name__)
+    coro_list = []
+    if USERS:
+        p_msg = ""
+        g_msg = ""
+        p_count = 0
+        g_count = 0
+        for pcount, gcount, men in USERS.values():
+            if pcount:
+                p_msg += f"👤 {men} ✉️ **{pcount}**\n"
+                p_count += pcount
+            if gcount:
+                g_msg += f"👥 {men} ✉️ **{gcount}**\n"
+                g_count += gcount
+        coro_list.append(
+            replied.edit(
+                f"`You recieved {p_count + g_count} messages while you were away. "
+                f"Check log for more details.`\n\n**AFK time** : __{afk_time}__",
+                del_in=3,
+            )
+        )
+        out_str = (
+            f"You've recieved **{p_count + g_count}** messages "
+            + f"from **{len(USERS)}** users while you were away!\n\n**AFK time** : __{afk_time}__\n"
+        )
+        if p_count:
+            out_str += f"\n**{p_count} Private Messages:**\n\n{p_msg}"
+        if g_count:
+            out_str += f"\n**{g_count} Group Messages:**\n\n{g_msg}"
+        coro_list.append(CHANNEL.log(out_str))
+        USERS.clear()
+    else:
+        await asyncio.sleep(3)
+        coro_list.append(replied.delete())
+    coro_list.append(
+        asyncio.gather(
+            AFK_COLLECTION.drop(),
+            SAVED_SETTINGS.update_one(
+                {"_id": "AFK"}, {"$set": {"on": False}}, upsert=True
+            ),
+        )
+    )
+    await asyncio.gather(*coro_list)
+
+
+@userge.bot.on_callback_query(filters.regex(pattern=r"^status_afk$"))
+async def status_afk_(_, c_q: CallbackQuery):
+    # _afk_time_ = time_formatter(round(time.time() - TIME))
+    if c_q.from_user and (
+        c_q.from_user.id in Config.OWNER_ID
+            ):
+            await c_q.answer(
+                f"Last Check: {afk_time}\nDev: @NoteZV",
+                show_alert=True,
+            )
+    else:
+        await c_q.answer(
+            f"Last Seen: {_afk_time_}\nDev: @NoteZV",
+            show_alert=True,
+        )
+    return status_afk_
+        
+        
 class _afk_:
     def out_str() -> str:
         _afk_time = time_formatter(round(time.time() - TIME))
@@ -235,80 +304,6 @@ class _afk_:
             ]
         ]
         return InlineKeyboardMarkup(buttons)
-
-@userge.on_filters(IS_AFK_FILTER & filters.outgoing, group=-1, allow_via_bot=False)
-async def handle_afk_outgoing(message: Message) -> None:
-    """handle outgoing messages when you afk"""
-    global IS_AFK  # pylint: disable=global-statement
-    IS_AFK = False
-    afk_time = time_formatter(round(time.time() - TIME))
-    replied: Message = await message.reply("`I'm no longer AFK!`", log=__name__)
-    coro_list = []
-    if USERS:
-        p_msg = ""
-        g_msg = ""
-        p_count = 0
-        g_count = 0
-        for pcount, gcount, men in USERS.values():
-            if pcount:
-                p_msg += f"👤 {men} ✉️ **{pcount}**\n"
-                p_count += pcount
-            if gcount:
-                g_msg += f"👥 {men} ✉️ **{gcount}**\n"
-                g_count += gcount
-        coro_list.append(
-            replied.edit(
-                f"`You recieved {p_count + g_count} messages while you were away. "
-                f"Check log for more details.`\n\n**AFK time** : __{afk_time}__",
-                del_in=3,
-            )
-        )
-        out_str = (
-            f"You've recieved **{p_count + g_count}** messages "
-            + f"from **{len(USERS)}** users while you were away!\n\n**AFK time** : __{afk_time}__\n"
-        )
-        if p_count:
-            out_str += f"\n**{p_count} Private Messages:**\n\n{p_msg}"
-        if g_count:
-            out_str += f"\n**{g_count} Group Messages:**\n\n{g_msg}"
-        coro_list.append(CHANNEL.log(out_str))
-        USERS.clear()
-    else:
-        await asyncio.sleep(3)
-        coro_list.append(replied.delete())
-    coro_list.append(
-        asyncio.gather(
-            AFK_COLLECTION.drop(),
-            SAVED_SETTINGS.update_one(
-                {"_id": "AFK"}, {"$set": {"on": False}}, upsert=True
-            ),
-        )
-    )
-    await asyncio.gather(*coro_list)
-
-# teste #
-@userge.bot.on_callback_query(filters.regex(pattern=r"^status_afk$"))
-async def status_afk_(_, c_q: CallbackQuery):
-    _afk_time_ = time_formatter(round(time.time() - TIME))
-    if c_q.from_user and (
-        c_q.from_user.id in Config.OWNER_ID
-            ):
-            # try:
-            # await c_q.edit_message_text(
-                # reply_markup=_afk_.afk_buttons(),
-                # disable_page_web_view=True,
-            # )
-            await c_q.answer(
-                f"Last Check: {_afk_time_}\nDev: @NoteZV",
-                show_alert=True,
-            )
-    else:
-        await c_q.answer(
-            f"Last Seen: {_afk_time_}\nDev: @NoteZV",
-            show_alert=True,
-        )
-    return status_afk_
-        
         
     
 AFK_REASONS = (
