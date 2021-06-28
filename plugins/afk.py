@@ -12,14 +12,7 @@ from userge.utils import time_formatter
 
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton, CallbackQuery
 
-from userge.plugins.utils.afk_inline import (
-    send_inline_afk,
-    send_inline_afk_, 
-    _send_inline_afk,
-)
-# from userge.plugins.utils.afk_inline_ import send_inline_afk_
-# from userge.plugins.utils.afk_inline import send_inline_afk
-# from userge.plugins.utils._afk_inline import _send_inline_afk
+from userge.plugins.utils.afk_inline import send_inline_afk, send_inline_afk_, _send_inline_afk
 
 _TELE_REGEX = comp_regex(
     r"http[s]?://(i\.imgur\.com|telegra\.ph/file|t\.me)/(\w+)(?:\.|/)(gif|mp4|jpg|png|jpeg|[0-9]+)(?:/([0-9]+))?"
