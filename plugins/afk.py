@@ -234,18 +234,20 @@ async def handle_afk_outgoing(message: Message) -> None:
 
 @userge.bot.on_callback_query(filters.regex(pattern=r"^status_afk$"))
 async def status_afk_(_, c_q: CallbackQuery):
-    # _afk_time_ = time_formatter(round(time.time() - TIME))
-    if c_q.from_user and (
-        c_q.from_user.id in Config.OWNER_ID
-            ):
-            await c_q.answer(
-                f"Last Check: {afk_time}\nDev: @NoteZV",
-                show_alert=True,
-            )
-    else:
-        await c_q.answer(
-            f"Last Seen: {afk_time}\nDev: @NoteZV",
-            show_alert=True,
+    _afk_time_ = time_formatter(round(time.time() - TIME))
+    await c_q.answer(
+        f"**Last Check:** {_afk_time}\nDev: @NoteZV")
+    # if c_q.from_user and (
+        # c_q.from_user.id in Config.OWNER_ID
+            # ):
+            # await c_q.answer(
+                # f"Last Check: {_afk_time_}\nDev: @NoteZV",
+                # show_alert=True,
+            # )
+    # else:
+        # await c_q.answer(
+            # f"Last Seen: {_afk_time_}\nDev: @NoteZV",
+            # show_alert=True,
         )
     return status_afk_
         
