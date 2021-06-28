@@ -230,7 +230,7 @@ class _afk_:
     def afk_buttons() -> InlineKeyboardMarkup:
         buttons = [
             [
-                IInlineKeyboardButton(text="Test", callback_data="status_afk"),
+                # IInlineKeyboardButton(text="Test", callback_data="status_afk"),
                 InlineKeyboardButton(text="▫️Bio", url="https://t.me/notezvbio"),
             ]
         ]
