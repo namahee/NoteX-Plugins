@@ -11,11 +11,11 @@ from userge.utils import time_formatter
 
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton, CallbackQuery
 
-# from userge.plugins.utils.afk_inline import (
-    # send_inline_afk,
-    # send_inline_afk_,
-    # _send_inline_afk,
-# )
+from userge.plugins.utils.afk_inline import (
+    send_inline_afk,
+    send_inline_afk_,
+    _send_inline_afk,
+)
 
 
 _TELE_REGEX = comp_regex(
