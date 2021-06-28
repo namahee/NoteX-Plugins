@@ -133,7 +133,7 @@ async def handle_afk_incomming(message: Message) -> None:
                 type_, media_ = await _afk_.check_media_link(match.group(0))
                 if match.group(3) == "jpg":
                     await send_inline_afk_(message)
-                elif match.group(3) == "giisf":
+                elif match.group(3) == "gif":
                      await _send_inline_afk(message)
                 # if type_ == "url_image":
                     # await send_inline_afk_(message)
