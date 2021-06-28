@@ -106,12 +106,12 @@ async def active_afk(message: Message) -> None:
     allow_via_bot=False,
 )
 
-async def _send_inline_afk_(message: Message):
-    _bot = await userge.bot.get_me()
-    _x = await userge.get_inline_bot_results(_bot.username, "cafe")
-    await userge.send_inline_bot_result(
-        chat_id=message.chat.id, query_id=_x.query_id, result_id=_x.results[0].id
-    )
+# async def _send_inline_afk_(message: Message):
+    # _bot = await userge.bot.get_me()
+    # _x = await userge.get_inline_bot_results(_bot.username, "cafe")
+    # await userge.send_inline_bot_result(
+        # chat_id=message.chat.id, query_id=_x.query_id, result_id=_x.results[0].id
+    # )
 
 async def handle_afk_incomming(message: Message) -> None:
     """handle incomming messages when you afk"""
