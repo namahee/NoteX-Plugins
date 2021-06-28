@@ -13,8 +13,8 @@ from userge.utils import time_formatter
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton, CallbackQuery
 
 # from afk_inline import send_inline_afk, send_inline_afk_, _send_inline_afk
-from userge.plugins.utils.afk_inline import send_inline_afk
 from userge.plugins.utils.afk_inline_ import send_inline_afk_
+from userge.plugins.utils.afk_inline import send_inline_afk
 from userge.plugins.utils._afk_inline import _send_inline_afk
 
 _TELE_REGEX = comp_regex(
