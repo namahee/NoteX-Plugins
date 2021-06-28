@@ -120,7 +120,7 @@ async def handle_afk_incomming(message: Message) -> None:
         if not (USERS[user_id][0] + USERS[user_id][1]) % randint(2, 4):
             match = _TELE_REGEX.search(REASON)
             if match:
-                type_, media_ = await _afk_.check_media_link(match.group(0))
+                type_, media_ = await _afk.check_media_link(match.group(0))
                 if type_ == "url_image":
                     await send_inline_afk_(message)
                 elif type_ == "url_gif":
