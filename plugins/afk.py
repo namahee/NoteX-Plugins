@@ -16,7 +16,7 @@ from userge.plugins.utils.afk_inline import *
 
 
 _TELE_REGEX = comp_regex(
-    r"http[s]?://(i\.imgur\.com|telegra\.ph/file|t\.me)/(\w+)(?:\.|/)(gif|mp4|jpg|png|jpeg|[0-9]+)(?:/([0-9]+))?"
+    r"http[s]?://(i\.imgur\.com|telegra\.ph/file|t\.me)/(\w+)(?:\.|/)(gif|jpg|png|jpeg|[0-9]+)(?:/([0-9]+))?"
 )
 
 CHANNEL = userge.getCLogger(__name__)
