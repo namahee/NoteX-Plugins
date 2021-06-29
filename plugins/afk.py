@@ -237,7 +237,7 @@ async def handle_afk_outgoing(message: Message) -> None:
 async def status_afk_(_, c_q: CallbackQuery):
     _afk_time_ = time_formatter(round(time.time() - TIME))
     await c_q.answer(
-        f"**Last Check:** {_afk_time_}\n{random.choice(frases)}\n\nDev: @NoteZV",
+        f"<b>Last Check:</b> {_afk_time_}\n\n{random.choice(frases)}\n\nDev: @NoteZV",
         show_alert=True,
     )
     return status_afk_
