@@ -236,7 +236,7 @@ async def handle_afk_outgoing(message: Message) -> None:
 async def status_afk_(_, c_q: CallbackQuery):
     _afk_time_ = time_formatter(round(time.time() - TIME))
     await c_q.answer(
-        f"**Last Check:** {_afk_time}\nDev: @NoteZV")
+        f"**Last Check:** {_afk_time_}\nDev: @NoteZV")
     # if c_q.from_user and (
         # c_q.from_user.id in Config.OWNER_ID
             # ):
