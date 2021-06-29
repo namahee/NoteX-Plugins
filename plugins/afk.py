@@ -241,12 +241,13 @@ async def status_afk_(_, c_q: CallbackQuery):
     )
     return status_afk_
         
-@userge.bot.on_callback_query(filters.regex(pattern=r"^bio_afk$")
+@userge.bot.on_callback_query(filters.regex(pattern=r"^bio_afk$"))
 async def bio_afk_(_, c_q: CallbackQuery):
     await c_q.answer(
        "▫️@NoteZV 𝐁𝐢𝐨\n🔗 @notezvbio\n",
-        show_alert=True,
+       show_alert=True,
     )
+    return bio_afk_
 
 class _afk_:
     def out_str() -> str:
