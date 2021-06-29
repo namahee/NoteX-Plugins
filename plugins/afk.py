@@ -235,14 +235,19 @@ async def handle_afk_outgoing(message: Message) -> None:
 
 @userge.bot.on_callback_query(filters.regex(pattern=r"^status_afk$"))
 async def status_afk_(_, c_q: CallbackQuery):
-    _afk_time_ = time_formatter(round(time.time() - TIME))
     await c_q.answer(
-        f"**Last Check:** {_afk_time_}\n\n**Reflita:** {random.choice(frases)}\n\n**Dev:** @NoteZV",
+        f"▪️@NoteZV 𝐒𝐓𝐀𝐓𝐔𝐒:\n\n𝐑𝐞𝐟𝐥𝐢𝐭𝐚:\n ╰• {random.choice(frases)}\n,
         show_alert=True,
     )
     return status_afk_
         
-        
+@userge.bot.on_callback_query(filters.regex(pattern=r"^bio_afk$")
+async def bio_afk_(_, c_q: CallbackQuery):
+    await c_q.answer(
+       "@NoteZV 𝐁𝐢𝐨\n🔗 @notezvbio\n "
+        show_alert=True,
+    )
+
 class _afk_:
     def out_str() -> str:
         _afk_time = time_formatter(round(time.time() - TIME))
