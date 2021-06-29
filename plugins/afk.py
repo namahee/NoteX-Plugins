@@ -244,7 +244,7 @@ async def status_afk_(_, c_q: CallbackQuery):
 @userge.bot.on_callback_query(filters.regex(pattern=r"^bio_afk$")
 async def bio_afk_(_, c_q: CallbackQuery):
     await c_q.answer(
-       "@NoteZV 𝐁𝐢𝐨\n🔗 @notezvbio\n "
+       "▫️@NoteZV 𝐁𝐢𝐨\n🔗 @notezvbio\n "
         show_alert=True,
     )
 
@@ -298,7 +298,8 @@ class _afk_:
         buttons = [
             [
                 InlineKeyboardButton(text="▪️Status", callback_data="status_afk"),
-                InlineKeyboardButton(text="▫️Bio", url="https://t.me/notezvbio"),
+                InlineKeyboardButton(text="▫️Bio", callback_data="bio_afk"),
+                # InlineKeyboardButton(text="▫️Bio", url="https://t.me/notezvbio"),
             ]
         ]
         return InlineKeyboardMarkup(buttons)
