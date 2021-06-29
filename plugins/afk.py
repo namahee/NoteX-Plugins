@@ -236,7 +236,7 @@ async def handle_afk_outgoing(message: Message) -> None:
 @userge.bot.on_callback_query(filters.regex(pattern=r"^status_afk$"))
 async def status_afk_(_, c_q: CallbackQuery):
     await c_q.answer(
-        f"▪️@NoteZV 𝐒𝐓𝐀𝐓𝐔𝐒:\n\n𝐑𝐞𝐟𝐥𝐢𝐭𝐚:\n ╰• {random.choice(frases)}\n",
+        f"▪️@NoteZV 𝐒𝐓𝐀𝐓𝐔𝐒:\n\n𝐢𝐧𝐬𝐩𝐢𝐫𝐚𝐜̧𝐚̃𝐨:\n ╰• {random.choice(frases)}\n",
         show_alert=True,
     )
     return status_afk_
