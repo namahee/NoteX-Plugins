@@ -5,6 +5,7 @@ import time
 from random import randint
 from re import compile as comp_regex
 
+import random
 
 from userge import Config, Message, filters, get_collection, userge
 from userge.utils import time_formatter
@@ -236,7 +237,7 @@ async def handle_afk_outgoing(message: Message) -> None:
 async def status_afk_(_, c_q: CallbackQuery):
     _afk_time_ = time_formatter(round(time.time() - TIME))
     await c_q.answer(
-        f"**Last Check:** {_afk_time_}\nDev: @NoteZV",
+        f"**Last Check:** {_afk_time_}\n{random.choice(ffrases}\nDev: @NoteZV",
         show_alert=True,
     )
     return status_afk_
