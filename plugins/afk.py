@@ -236,19 +236,9 @@ async def handle_afk_outgoing(message: Message) -> None:
 async def status_afk_(_, c_q: CallbackQuery):
     _afk_time_ = time_formatter(round(time.time() - TIME))
     await c_q.answer(
-        f"**Last Check:** {_afk_time_}\nDev: @NoteZV")
-    # if c_q.from_user and (
-        # c_q.from_user.id in Config.OWNER_ID
-            # ):
-            # await c_q.answer(
-                # f"Last Check: {_afk_time_}\nDev: @NoteZV",
-                # show_alert=True,
-            # )
-    # else:
-        # await c_q.answer(
-            # f"Last Seen: {_afk_time_}\nDev: @NoteZV",
-            # show_alert=True,
-        # )
+        f"**Last Check:** {_afk_time_}\nDev: @NoteZV",
+        show_alert=True,
+    )
     return status_afk_
         
         
@@ -337,4 +327,10 @@ I'll get back to you later.",
     "I bet you were expecting an away message!",
     "Life is so short, there are so many things to do...\nI'm away doing one of them..",
     "I am not here right now...\nbut if I was...\n\nwouldn't that be awesome?",
+)
+
+frases = (
+    "Vença em silêncio.\nDeixe eles pensarem que você está perdendo.",
+    'Quem se expões ao "ridículo", vive o extraordinário.',
+    "Você pode abrir a boca e reclamar,\nou abrir a mente e aprender.\nO dia será o mesmo, o resultado não.",
 )
