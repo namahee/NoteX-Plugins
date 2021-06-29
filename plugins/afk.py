@@ -187,7 +187,7 @@ async def handle_afk_outgoing(message: Message) -> None:
     """handle outgoing messages when you afk"""
     global IS_AFK  # pylint: disable=global-statement
     IS_AFK = False
-    afk_time = time_formatter(round(time.time() - TIME))
+    # afk_time = time_formatter(round(time.time() - TIME))
     replied: Message = await message.reply("`I'm no longer AFK!`", log=__name__)
     coro_list = []
     if USERS:
@@ -237,7 +237,7 @@ async def handle_afk_outgoing(message: Message) -> None:
 async def status_afk_(_, c_q: CallbackQuery):
     _afk_time_ = time_formatter(round(time.time() - TIME))
     await c_q.answer(
-        f"**Last Check:** {_afk_time_}\n\n**Reflite:** {random.choice(frases)}\n\n**Dev:** @NoteZV",
+        f"**Last Check:** {_afk_time_}\n\n**Reflita:** {random.choice(frases)}\n\n**Dev:** @NoteZV",
         show_alert=True,
     )
     return status_afk_
