@@ -248,7 +248,7 @@ async def status_afk_(_, c_q: CallbackQuery):
         # await c_q.answer(
             # f"Last Seen: {_afk_time_}\nDev: @NoteZV",
             # show_alert=True,
-        )
+        # )
     return status_afk_
         
         
