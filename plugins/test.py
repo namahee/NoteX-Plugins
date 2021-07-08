@@ -10,7 +10,7 @@ from userge.utils.exceptions import StopConversation
     "nbot",
     about={
         "header": "criar um bot",
-        "como usar": "{tr}nbot [nome] | [username_bot] or [usernameBot]", 
+        "como usar": "{tr}nbot [nome] | [username_bot] ou [usernameBot]", 
     },
     allow_via_bot=False,
     allow_channels=False,
