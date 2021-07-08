@@ -6,8 +6,6 @@ from pyrogram.errors import YouBlockedUser
 from userge import Config, Message, userge
 from userge.utils.exceptions import StopConversation
 
-from init.logbot.core.methods.rawMethods import raw.getLastMessage
-
 @userge.on_cmd(
     "nbot",
     about={
