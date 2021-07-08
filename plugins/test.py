@@ -33,7 +33,6 @@ async def nbot_(message: Message):
                 # message.edit("Ocorreu algum erro, veja o @BotFather.")
             else:
                 await message.edit(f"Prontinho, bot criado. [Aqui](t.me{name[1]})")
-            # await conv.send_message(name[1])
         # await message.edit(f"Aqui:\n\n{oi}")
         # await message.edit(f"Prontinho, bot criado. [Aqui](t.me/{name[1]})")
   
