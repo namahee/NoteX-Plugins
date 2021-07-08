@@ -60,7 +60,7 @@ async def cname_(message: Message):
             await conv.send_message(both[1])
         await message.edit("Pronto! O nome do seu bot foi alterado.")
     except YouBlockedUser:
-        message.edit("Desbloqueie o **@BotFather**")
+        await message.edit("Desbloqueie o **@BotFather**")
     except StopConversation:
         await message.err("O bot está morto...")
     
