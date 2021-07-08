@@ -27,7 +27,7 @@ async def nbot_(message: Message):
             await conv.send_message("/newbot")
             await conv.send_message(name[0])
             await conv.send_message(name[1])
-        await message.edit(f"Prontinho, bot criado. [Aqui](t.me/{name[1})")
+        await message.edit(f"Prontinho, bot criado. [Aqui](t.me/{name[1]})")
     except YouBlockedUser:
         await message.edit("Desbloqueie o **@BotFather**")
     except StopConversation:
