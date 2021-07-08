@@ -27,8 +27,8 @@ async def nbot_(message: Message):
             await conv.send_message("/newbot")
             await conv.send_message(name[0])
             await conv.send_message(name[1])
-            oi = conv.get_response(mark_read=True)
-        await message.edit(oi)
+            oi = await conv.get_response(mark_read=True)
+        await message.edit(f"Aqui:\n\n{oi}")
         # await message.edit(f"Prontinho, bot criado. [Aqui](t.me/{name[1]})")
   
     except YouBlockedUser:
