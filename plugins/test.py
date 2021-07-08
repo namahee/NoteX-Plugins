@@ -24,11 +24,15 @@ async def nbot_(message: Message):
         async with userge.conversation("BotFather") as conv:
             await conv.send_message("/start")
             await conv.get_response(mark_read=True)
+            oi = await conv.get_response(mark_read=True)
             await conv.send_message("/newbot")
             await conv.send_message(name[0])
-            await conv.send_message(name[1])
-            oi = await conv.get_response(mark_read=True)
-        await message.edit(f"Aqui:\n\n{oi}")
+            if not oi.chat["text"] == "Good. Now let's choose a username for your bot. It must end in `bot`. Like this, for example: TetrisBot or tetris_bot.":
+                message.edit("Ocorreu algum erro, veja o @BotFather.")
+            else:
+                await conv.send_messagd(name[1])
+            # await conv.send_message(name[1])
+        # await message.edit(f"Aqui:\n\n{oi}")
         # await message.edit(f"Prontinho, bot criado. [Aqui](t.me/{name[1]})")
   
     except YouBlockedUser:
