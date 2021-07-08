@@ -32,7 +32,6 @@ async def nbot_(message: Message):
                 message.edit(oi.chat["text"])
                 # message.edit("Ocorreu algum erro, veja o @BotFather.")
             else:
-                await conv.send_message(name[1])
                 await message.edit(f"{oi.chat['text']}")
             # await conv.send_message(name[1])
         # await message.edit(f"Aqui:\n\n{oi}")
