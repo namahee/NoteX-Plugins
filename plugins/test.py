@@ -31,4 +31,4 @@ async def nbot_(message: Message):
     except YouBlockedUser:
         await message.edit("Desbloqueie o **@BotFather**")
     except StopConversation:
-        await msg.err("O Bot está morto...")
+        await message.err("O Bot está morto...")
