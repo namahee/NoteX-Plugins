@@ -98,7 +98,7 @@ async def sdescription_(message: Message):
     "atext",
     about={
         "header": "Coloca ou altera o texto sobre o bot",
-        "como usar": "{tr}atext [@UsernameDoBot] | [nome]",
+        "como usar": "{tr}atext [@UsernameDoBot] | [texto]",
     },
     allow_via_bot=False,
     allow_channels=False,
