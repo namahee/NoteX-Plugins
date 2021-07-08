@@ -102,7 +102,7 @@ async def sdescription_(message: Message):
     allow_via_bot=False,
     allow_channels=False,
 )
-async def cname_(message: Message):
+async def atext_(message: Message):
     both = message.input_str.split(" | ", maxsplit=1)
     if not both:
         await message.err("Coloque um username e um nome.")
