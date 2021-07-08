@@ -30,7 +30,7 @@ async def nbot_(message: Message):
             if not oi.chat["text"] == "Good. Now let's choose a username for your bot. It must end in `bot`. Like this, for example: TetrisBot or tetris_bot.":
                 message.edit("Ocorreu algum erro, veja o @BotFather.")
             else:
-                await conv.send_messagd(name[1])
+                await conv.send_message(name[1])
                 await message.edit(f"{oi.chat['text']}")
             # await conv.send_message(name[1])
         # await message.edit(f"Aqui:\n\n{oi}")
