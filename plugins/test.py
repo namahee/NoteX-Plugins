@@ -27,16 +27,40 @@ async def nbot_(message: Message):
             await conv.send_message("/newbot")
             await conv.send_message(name[0])
             await conv.send_message(name[1])
-            oi = await conv.get_response(mark_read=True)
-        if oi['text'] == "Sorry, this username is invalid." or "Sorry, this username is already taken. Please try something different.":
-            await message.edit(oi['text'])
-                # message.edit("Ocorreu algum erro, veja o @BotFather.")
-        else:
-            await message.edit(f"Prontinho, bot criado. [Aqui](t.me{name[1]})")
+            # oi = await conv.get_response(mark_read=True)
         # await message.edit(f"Aqui:\n\n{oi}")
-        # await message.edit(f"Prontinho, bot criado. [Aqui](t.me/{name[1]})")
+        await message.edit(f"Prontinho, bot criado. [Aqui](t.me/{name[1]})")
   
     except YouBlockedUser:
         await message.edit("Desbloqueie o **@BotFather**")
     except StopConversation:
         await message.err("O Bot está morto...")
+        
+
+@userge.on_cmd(
+    "cname",
+    about={
+        "header": "muda o nome do bot.",
+        "como usar": "{tr}cname [@UsernameDoBot] | [nome]",
+    },
+    allow_via_bot=False,
+    allow_channels=False,
+)
+async def cname_(message: Message):
+    both = message.input_str.split(" | ", maxsplit=1)
+    if not both:
+        await message.err("Coloque um username e um nome.")
+        return
+    try:
+        async with userge.conversation("BoBotFather" as conv:
+            await conv.send_message("/start")
+            await conv.get_response(mark_read=True)
+            await conv.send_message("/setname")
+            await conv.send_message(both[0])
+            await conv.send_message(both[1])
+        await message.edit("Pronto! O nome do seu bot foi alterado.")
+    except YouBlockedUser:
+        message.edit("Desbloqueie o **@BotFather**")
+    except StopConversation:
+        await message.err("O bot está morto...")
+    
