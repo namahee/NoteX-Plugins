@@ -148,7 +148,7 @@ async def spick_(message: Message):
                     photo=both[1],
                 )
             )
-        await message.edit("Pronto! Foi colocada uma foto no perfil do seu bot")
+        await message.edit("Pronto! Foi colocada uma foto no perfil do seu bot.")
     except YouBlockedUser:
         await message.edit("Desbloqueie o **@BotFather**")
     except StopConversation:
