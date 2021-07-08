@@ -120,4 +120,37 @@ async def atext_(message: Message):
         await message.edit("Desbloqueie o **@BotFather**")
     except StopConversation:
         await message.err("O bot morreu...")
+        
+
+@userge.on_cmd(
+    "spick",
+    about={
+        "header": "Coloca uma foto no perfil do bot",
+        "como usar": "{tr}atext [@UsernameDoBot] | [LinkDaFoto]",
+    },
+    allow_via_bot=False,
+    allow_channels=False,
+)
+async def spick_(message: Message):
+    both = message.input_str.split(" | ", maxsplit=1)
+    if not both:
+        await message.err("Coloque um username e um link.")
+        return
+    try:
+        async with userge.conversation("BotFather") as conv:
+            await conv.send_message("/start")
+            await conv.get_response(mark_read=True)
+            await conv.send_message("/setpick")
+            await conv.send_message(both[0])
+            await conv.send_message(
+                message.client.send_photo(
+                    message.chat.id,
+                    photo=both[1],
+                )
+            )
+        await message.edit("Pronto! Foi colocada uma foto no perfil do seu bot")
+    except YouBlockedUser:
+        await message.edit("Desbloqueie o **@BotFather**")
+    except StopConversation:
+        await message.err("O bot está morto...")
     
