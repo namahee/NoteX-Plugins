@@ -91,4 +91,32 @@ async def sdescription_(message: Message):
         await message.edit("Desbloqueie o **@BotFather**")
     except StopConversation:
         await message.err("O bot morreu...")
+        
+        
+@userge.on_cmd(
+    "atext",
+    about={
+        "header": "Coloca ou altera o texto sobre o bot",
+        "como usar": "{tr}atext [@UsernameDoBot] | [nome]",
+    },
+    allow_via_bot=False,
+    allow_channels=False,
+)
+async def cname_(message: Message):
+    both = message.input_str.split(" | ", maxsplit=1)
+    if not both:
+        await message.err("Coloque um username e um nome.")
+        return
+    try:
+        async with userge.conversation("BotFather") as conv:
+            await conv.send_message("/start")
+            await conv.get_response(mark_read=True)
+            await conv.send_message("/setabouttext")
+            await conv.send_message(both[0])
+            await conv.send_message(both[1])
+        await message.edit("Pronto! Foi alterada/colocada um texto sobre o seu bot")
+    except YouBlockedUser:
+        await message.edit("Desbloqueie o **@BotFather**")
+    except StopConversation:
+        await message.err("O bot morreu...")
     
