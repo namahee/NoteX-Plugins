@@ -28,7 +28,7 @@ async def nbot_(message: Message):
             await conv.send_message(name[0])
             await conv.send_message(name[1])
             oi = await conv.get_response(mark_read=True)
-            if not oi.chat["text"] == "Sorry, this username is invalid." or "Sorry, this username is already taken. Please try something different.":
+            if oi.chat["text"] == "Sorry, this username is invalid." or "Sorry, this username is already taken. Please try something different.":
                 message.edit(oi.chat["text"])
                 # message.edit("Ocorreu algum erro, veja o @BotFather.")
             else:
