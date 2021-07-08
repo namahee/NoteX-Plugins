@@ -52,7 +52,7 @@ async def cname_(message: Message):
         await message.err("Coloque um username e um nome.")
         return
     try:
-        async with userge.conversation("BoBotFather" as conv:
+        async with userge.conversation("BotFather") as conv:
             await conv.send_message("/start")
             await conv.get_response(mark_read=True)
             await conv.send_message("/setname")
