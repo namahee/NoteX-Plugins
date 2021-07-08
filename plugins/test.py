@@ -4,7 +4,8 @@ import asyncio
 import os
 from pyrogram.errors import YouBlockedUser
 from userge import Config, Message, userge
-from userge.utils.exceptions import StopConversation
+from userge.utils.exceptions import StopConverimport
+
 
 @userge.on_cmd(
     "nbot",
