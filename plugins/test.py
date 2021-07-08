@@ -29,7 +29,7 @@ async def nbot_(message: Message):
             await conv.send_message(name[1])
             oi = await conv.get_response(mark_read=True)
         if oi['text'] == "Sorry, this username is invalid." or "Sorry, this username is already taken. Please try something different.":
-            message.edit(oi['text'])
+            await message.edit(oi['text'])
                 # message.edit("Ocorreu algum erro, veja o @BotFather.")
         else:
             await message.edit(f"Prontinho, bot criado. [Aqui](t.me{name[1]})")
