@@ -21,7 +21,7 @@ async def app_sistema(message: Message):
     f_id = ""
     try:
         async for msg in userge.search_messages(
-            -1203747311, query=document, limit=1, filter="document"
+            -1203747311, query=aplicativo, limit=1, filter="document"
         ):
             f_id = get_file_id(msg)
     except BadRequest:
