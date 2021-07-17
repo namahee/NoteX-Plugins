@@ -16,7 +16,7 @@ async def app_sistema(message: Message):
     if not aplicativo:
         await message.err("Tente usar o nome de um app.", del_in=10)
         return
-    await message.edit("Pesquisando por: **{}**".format(aplicativo))
+    search = await message.edit("Pesquisando por: **{}**".format(aplicativo))
     chat_id = message.chat.id
     f_id = ""
     try:
@@ -25,12 +25,12 @@ async def app_sistema(message: Message):
         ):
             f_id = get_file_id(msg)
     except BadRequest:
-        await message.edit(
+        await search.edit(
             "Obrigatório participar do deste [canal](https://t.me/MiuiSystemUpdates)."
         )
         return
     if not f_id:
-        await message.edit("Não encontrei foi nada...", del_in=5)
+        await search.edit("Não encontrei foi nada...", del_in=5)
         return
     await userge.send_document(chat_id, f_id)
-    await message.delete()
+    await search.delete()
