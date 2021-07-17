@@ -33,4 +33,4 @@ async def app_sistema(message: Message):
         await message.edit("Não encontrei foi nada...", del_in=5)
         return
     await userge.send_document(chat_id, f_id)
-    await search.delete()
+    await message.delete()
