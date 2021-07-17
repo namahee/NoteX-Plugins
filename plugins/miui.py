@@ -16,7 +16,7 @@ async def app_sistema(message: Message):
     if not aplicativo:
         await message.err("Tente usar o nome de um app.", del_in=10)
         return
-    search = await message.edit("Pesquisando por: **{}**".format(aplicativo))
+    await message.edit("Pesquisando por: **{}**".format(aplicativo))
     chat_id = message.chat.id
     f_id = ""
     try:
