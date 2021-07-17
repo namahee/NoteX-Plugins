@@ -26,7 +26,7 @@ async def app_sistema(message: Message):
             f_id = get_file_id(msg)
     except BadRequest:
         await message.edit(
-            "Obrigatório participar do deste [canal](https://t.me/MiuiSystemUpdates) "
+            "Obrigatório participar do deste [canal](https://t.me/MiuiSystemUpdates).\n\n{}".format(msg)
         )
         return
     if not f_id:
