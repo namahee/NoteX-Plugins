@@ -25,12 +25,12 @@ async def app_sistema(message: Message):
         ):
             f_id = get_file_id(msg)
     except BadRequest:
-        await search.edit(
+        await message.edit(
             "Obrigatório participar do deste [canal](https://t.me/MiuiSystemUpdates) "
         )
         return
     if not f_id:
-        await search.edit("Não encontrei foi nada...", del_in=5)
+        await message.edit("Não encontrei foi nada...", del_in=5)
         return
     await userge.send_document(chat_id, f_id)
     await search.delete()
