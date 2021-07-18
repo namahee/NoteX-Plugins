@@ -123,7 +123,7 @@ async def handle_afk_incomming(message: Message) -> None:
                      await send_inline_afk(message)
             else:
                 coro_list.append(
-                    await _send_inline_kfa(message)
+                    await _send_inline_afk_(message)
                 )
                 # coro_list.append(
                     # message.reply(_afk_._out_str())
@@ -142,7 +142,7 @@ async def handle_afk_incomming(message: Message) -> None:
                 await send_inline_afk(message)
         else:
             coro_list.append(
-                await _send_inline_kfa(message)
+                await _send_inline_afk_(message)
             )
             # coro_list.append(
                 # message.reply(_afk_._out_str())
