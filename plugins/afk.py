@@ -118,11 +118,11 @@ async def handle_afk_incomming(message: Message) -> None:
             if match:
                 type_, media_ = await _afk_.check_media_link(match.group(0))
                 if type_ == "url_image":
-                    await send_inline_afk_(message)
+                    await message.reply(await send_inline_afk_(message))
                 elif type_ == "url_gif":
-                     await send_inline_afk(message)
+                     await message.reply(await send_inline_afk(message))
             else:
-                await _send_inline_afk(message)
+                await message.reply(await _send_inline_afk(message))
                 # coro_list.append(
                     # message.reply(_afk_._out_str())
                 # )
@@ -135,11 +135,11 @@ async def handle_afk_incomming(message: Message) -> None:
         if match:
             type_, media_ = await _afk_.check_media_link(match.group(0))
             if type_ == "url_image":
-                await send_inline_afk_(message)
+                await message.reply(await send_inline_afk_(message))
             elif type_ == "url_gif":
-                await send_inline_afk(message)
+                await message.reply(await send_inline_afk(message))
         else:
-            await _send_inline_afk(message)
+            await message.reply(await _send_inline_afk(message))
             # coro_list.append(
                 # message.reply(_afk_._out_str())
             # )
