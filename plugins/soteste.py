@@ -6,5 +6,5 @@ from userge import userge, Message
         "header": "só teste"
     },
 )
-async def ms(message: Message):
-    await message.edit(message)
+async def ms(message: Message, Message):
+    await message.edit(Message)
