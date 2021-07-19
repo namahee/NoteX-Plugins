@@ -4,7 +4,7 @@ from userge import userge, Message
     "ms",
     about={
         "header": "só teste"
-    }
+    },
 )
 async def ms(message: Message):
     await message.edit(message)
