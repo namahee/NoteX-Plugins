@@ -23,6 +23,7 @@ async def _song(message: Message):
             await conv.send_message("/start")
             await conc.get_response(mark_read=True)
             await conv.send_messsong(f"/music {song}")
+            await userge.search_message(f"{song}")
             
     except YouBlockedUser:
         await message.edit("Desbloqueie o **@NoteMusic_bot**")
