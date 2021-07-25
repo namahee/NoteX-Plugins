@@ -29,6 +29,11 @@ async def _song(message: Message):
                     f_id = get_file_id(msg)
             except:
                 await message.err("Encontrei foi nada...")
+            if not f_id:
+                await message.edit("Credita que não encontrei nada.")
+                return
+            await userge.send_audio(message.chat.id, f_id)
+            await message.delete()
     except YouBlockedUser:
         await message.edit("Desbloqueie o **@NoteMusic_bot**")
     except StopConversation:
