@@ -1,8 +1,9 @@
 # import os
 # import asyncio
-from pyrogram.errors import YouBlockedUser
+from pyrogram.errors import YouBlockedUser, BadRequest
 from userge import Config, Message, userge
 from userge.utils.exceptions import StopConverimport
+from userge.utils import get_file_id
 
 @userge.on_cmd(
     "song",
@@ -23,8 +24,11 @@ async def _song(message: Message):
             await conv.send_message("/start")
             await conc.get_response(mark_read=True)
             await conv.send_messsong(f"/music {song}")
-            await userge.search_message("NoteMusic_bot", f"{song}", limit=1, filter=audio)
-            
+            try:
+                async for msg in await userge.search_message("NoteMusic_bot", f"{song}", limit=1, filter=audio):
+                    f_id = get_file_id(msg)
+            except:
+                await message.err("Encontrei foi nada...")
     except YouBlockedUser:
         await message.edit("Desbloqueie o **@NoteMusic_bot**")
     except StopConversation:
