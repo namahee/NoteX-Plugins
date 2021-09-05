@@ -22,7 +22,7 @@ async def _song(message: Message):
     try:
         async with userge.conversation("notemusicbot") as conv:
             await conv.send_message("/start")
-            k = await conc.get_response(mark_read=True)
+            k = await conv.get_response(mark_read=True)
             await conv.send_message(f"/music {song}")
             await message.reply(k)
             try:
