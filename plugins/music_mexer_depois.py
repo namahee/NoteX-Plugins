@@ -20,12 +20,13 @@ async def _song(message: Message):
         await message.err("Escreva alguma música após o comando.")
         return
     try:
-        async with userge.conversation("NoteMusic_bot") as conv:
+        async with userge.conversation("notemusicbot") as conv:
             await conv.send_message("/start")
-            await conc.get_response(mark_read=True)
-            await conv.send_messsong(f"/music {song}")
+            k = await conc.get_response(mark_read=True)
+            await conv.send_message(f"/music {song}")
+            await message.reply(k)
             try:
-                async for msg in await userge.search_message("NoteMusic_bot", f"{song}", limit=1, filter=audio):
+                async for msg in await userge.search_message("notemusicbot", f"{song}", limit=1, filter=audio):
                     f_id = get_file_id(msg)
             except:
                 await message.err("Encontrei foi nada...")
@@ -35,7 +36,7 @@ async def _song(message: Message):
             await userge.send_audio(message.chat.id, f_id)
             await message.delete()
     except YouBlockedUser:
-        await message.edit("Desbloqueie o **@NoteMusic_bot**")
+        await message.edit("Desbloqueie o **@notemusicbot**")
     except StopConversation:
         await message.err("O Bot está morto...")
     
