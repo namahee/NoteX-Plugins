@@ -2,7 +2,7 @@
 # import asyncio
 from pyrogram.errors import YouBlockedUser, BadRequest
 from userge import Config, Message, userge
-from userge.utils.exceptions import StopConverimport
+from userge.utils.exceptions import StopConversation
 from userge.utils import get_file_id
 
 @userge.on_cmd(
