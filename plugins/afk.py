@@ -12,7 +12,7 @@ from userge.utils import time_formatter
 
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton, CallbackQuery
 
-from userge.plugins.utils.afk_inline import *
+from userge.plugins.utils.afk_inline import send_inline_afk, _send_inline_afk_, send_inline_afk_
 
 
 _TELE_REGEX = comp_regex(
@@ -122,7 +122,7 @@ async def handle_afk_incomming(message: Message) -> None:
                 elif type_ == "url_gif":
                      await send_inline_afk(message)
             else:
-                await _send_inline_afk(message)
+                await _send_inline_afk_(message)
                 # coro_list.append(
                     # message.reply(_afk_._out_str())
                 # )
@@ -139,7 +139,7 @@ async def handle_afk_incomming(message: Message) -> None:
             elif type_ == "url_gif":
                 await send_inline_afk(message)
         else:
-            await _send_inline_afk(message)
+            await _send_inline_afk_(message)
             # coro_list.append(
                 # message.reply(_afk_._out_str())
             # )
