@@ -116,8 +116,8 @@ async def handle_afk_incomming(message: Message) -> None:
         if not (USERS[user_id][0] + USERS[user_id][1]) % randint(2, 4):
             match = _TELE_REGEX.search(REASON)
             if match:
-                # link = match.group(0) if match.group(3) != "mp4" else str(match.group(0).replace("mp4", "gif"))
-                type_, media_ = await _afk_.check_media_link(match.group(0)) if match.group(3) != "mp4" else type_, media_ = await _afk_.check_media_link(str(match.group(0).replace("mp4", "gif")))
+                link = match.group(0) if match.group(3) != "mp4" else str(match.group(0)).replace("mp4", "gif"))
+                type_, media_ = await _afk_.check_media_link(link)
                 if type_ == "url_image":
                     await send_inline_afk_(message)
                 elif type_ == "url_gif":
@@ -144,7 +144,7 @@ async def handle_afk_incomming(message: Message) -> None:
             # coro_list.append(
                 # message.reply(_afk_._out_str())
             # )
-        if chat.type == "private":
+        if chat.type == "private": 
             USERS[user_id] = [1, 0, user_dict["mention"]]
         else:
             USERS[user_id] = [0, 1, user_dict["mention"]]
